@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace CounterpointGenerator
 {
+    /**
+     * A mocked instantiated of OutputTranslator.
+     */
     public class MockOutputTranslator: IOutputTranslator
     {
         public MockOutputTranslator()

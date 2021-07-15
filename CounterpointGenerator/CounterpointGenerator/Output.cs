@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace CounterpointGenerator
 {
+    /**
+     * A mocked implementation of the output translator layer.
+     */
     public class Output: IOutput
     {
         public Output()

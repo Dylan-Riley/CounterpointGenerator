@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace CounterpointGenerator
 {
+    /**
+     * A mocked implementation of the layer that translates user input to intermediate representation.
+     */
     public class MockInputTranslator: IInputTranslator
     {
         public MockInputTranslator()

@@ -37,6 +37,10 @@ namespace CounterpointGenerator
             }
         }
 
+        /**
+         * The main pipeline.
+         * Take input from the user, generate polyphonic composition, then expose it to the user.
+         */
         public async Task RunGenerator()
         {
             // Consider adding graceful stopping on cancellation request.

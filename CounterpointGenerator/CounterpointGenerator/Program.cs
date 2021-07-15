@@ -23,8 +23,8 @@ namespace CounterpointGenerator
                     services.AddHostedService<GeneratorHost>()
                             // For now, registering mocks.
                             .AddSingleton<IInputTranslator, MockInputTranslator>()
-                            .AddTransient<IGenerator, MockGenerator>()
-                            .AddTransient<IOutputTranslator, MockOutputTranslator>());
+                            .AddSingleton<IGenerator, MockGenerator>()
+                            .AddSingleton<IOutputTranslator, MockOutputTranslator>());
         // Let's make everything a singleton for now.
         // Depending on the implementation might make sense to have generator be transient.
 

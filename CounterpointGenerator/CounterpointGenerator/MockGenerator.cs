@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace CounterpointGenerator
 {
+    /**
+     * A mocked implementation of the counterpoint generator.
+     */
     public class MockGenerator: IGenerator
     {
         public MockGenerator()
