@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/Users/akabra/.dotnet/store/|arch|/|tfm|",
+      "/Users/akabra/.nuget/packages"
+    ]
+  }
+}

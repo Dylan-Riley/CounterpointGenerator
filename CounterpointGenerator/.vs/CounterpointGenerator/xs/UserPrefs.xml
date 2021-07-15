@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{FD477AD3-8C64-48B8-863E-BF25E06D7E17}|Default">
+  <MonoDevelop.Ide.ItemProperties.CounterpointGenerator PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="CounterpointGenerator/Program.cs">
+    <Files>
+      <File FileName="CounterpointGenerator/MockOutputTranslator.cs" Line="15" Column="41" />
+      <File FileName="CounterpointGenerator/IOutputTranslator.cs" Line="7" Column="14" />
+      <File FileName="CounterpointGenerator/MockGenerator.cs" Line="21" Column="55" />
+      <File FileName="CounterpointGenerator/GeneratorHost.cs" Line="43" Column="39" />
+      <File FileName="CounterpointGenerator/IOutput.cs" Line="12" Column="16" />
+      <File FileName="CounterpointGenerator/Output.cs" Line="16" Column="24" />
+      <File FileName="CounterpointGenerator/Input.cs" Line="18" Column="13" />
+      <File FileName="CounterpointGenerator/MockInputTranslator.cs" Line="16" Column="24" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="CounterpointGenerator" expanded="True">
+            <Node name="CounterpointGenerator" expanded="True">
+              <Node name="Program.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
