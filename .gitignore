@@ -390,3 +390,6 @@ FodyWeavers.xsd
 # OS Generated
 .DS_Store*
 Icon?
+
+# Visual studio code
+.vscode
