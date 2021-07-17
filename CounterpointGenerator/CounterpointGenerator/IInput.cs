@@ -13,6 +13,15 @@ namespace CounterpointGenerator
          */
         System.Collections.Generic.List<int> Cantus { get; set; }
 
+        //TimingPreferences
+        //RulePreferences
+
         string ToString();
     }
+
+    //public enum TimingPreferences
+    //{
+    //    generateAll,
+    //    generateFor10s,
+    //}
 }
