@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace CounterpointGenerator{
     public class penultimateNoteRule: IRules {
         /**
@@ -6,7 +9,7 @@ namespace CounterpointGenerator{
          * For a note higher than the cantus firmus it must be a minor third
          */
         
-        private Set<int> legalNotes = {-3, 3};
+        private List<int> legalNotes = new List<int>(){-3, 3};
 
         public List<int> apply(List<int> possibilities, int currentNote, int position, int length) {
             if (length - position == 1){
@@ -14,7 +17,7 @@ namespace CounterpointGenerator{
                 List<int> output = new List<int>();
                 foreach (int n in possibilities) {
                     if(legalNotes.Contains(n - currentNote)){
-                        output.add(n);
+                        output.Add(n);
                     }
                 }
                 return output;
@@ -22,6 +25,11 @@ namespace CounterpointGenerator{
             else {
                 return possibilities;
             }
+        }
+
+        public List<int> apply(List<int> possibilities)
+        {
+            throw new ArgumentException("penultimate Rule expects needs more input!");
         }
     }
 }
