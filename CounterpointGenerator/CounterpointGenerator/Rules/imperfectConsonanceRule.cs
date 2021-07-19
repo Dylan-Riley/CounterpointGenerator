@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace CounterpointGenerator {
     public class imperfectConsonanceRule: IRules {
         /**
@@ -11,7 +14,7 @@ namespace CounterpointGenerator {
          */
 
         //Includes one octave up or down
-        private Set<int> imperfectIntervals = {-9, -8, -4, -3, 3, 4, 8, 9};
+        private List<int> imperfectIntervals =  new List<int>(){-9, -8, -4, -3, 3, 4, 8, 9};
 
         public List<int> apply(List<int> possibilities, int currentNote){
             List<int> output = new List<int>();
@@ -19,7 +22,7 @@ namespace CounterpointGenerator {
                 // Add checking outside one octave range?
                 if (imperfectIntervals.Contains(n - currentNote)){
                     //If the difference between not in possibilities n is equal to an imperfect interval
-                    output.add(n);
+                    output.Add(n);
                 }
             }
             return output;

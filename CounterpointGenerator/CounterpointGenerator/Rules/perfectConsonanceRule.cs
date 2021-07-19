@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace CounterpointGenerator {
     public class perfectConsonanceRule: IRules {
         /**
@@ -12,7 +15,7 @@ namespace CounterpointGenerator {
 
          //Includes one octave up or down
          // {8vb, lower fifth, lower fourth, upper fourth, upper fifth, 8va}
-        private Set<int> perfectIntervals = {-12, -7, -5, 5, 7, 12};
+        private List<int> perfectIntervals = new List<int>(){-12, -7, -5, 5, 7, 12};
 
         public List<int> apply(List<int> possibilities, int currentNote) {
             List<int> output = new List<int>();
@@ -21,7 +24,7 @@ namespace CounterpointGenerator {
                 if (perfectIntervals.Contains(n - currentNote)){
                     //If the difference between note in possibilities n is
                     //equal to a perfect interval
-                    output.add(n);
+                    output.Add(n);
                 }
             }
             return output;

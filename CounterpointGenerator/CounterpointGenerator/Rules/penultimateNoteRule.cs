@@ -27,9 +27,9 @@ namespace CounterpointGenerator{
             }
         }
 
-        public List<int> apply(List<int> possibilities)
+        public List<int> apply(List<int> possibilities, int currentNote)
         {
-            throw new ArgumentException("penultimate Rule expects needs more input!");
+            throw new ArgumentException("Penultimate Rule needs more input!");
         }
     }
 }
