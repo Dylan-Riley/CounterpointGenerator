@@ -7,8 +7,8 @@ namespace CounterpointGenerator{
          * The second-to-last bar has strict requirements
          * For a note lower than the cantus firmus it must be a major sixth
          * For a note higher than the cantus firmus it must be a minor third
+         * This means the legal note is either three semitones up or three semitones down
          */
-        
         private readonly List<int> legalNotes = new List<int>(){-3, 3};
 
         /**
