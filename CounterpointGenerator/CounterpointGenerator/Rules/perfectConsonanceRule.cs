@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 namespace CounterpointGenerator {
-    public class perfectConsonanceRule: IRules {
+    public class PerfectConsonanceRule: IRules {
         /**
          * Perfect consonance includes the intervals fourth, fifth, octave
          * These are 5, 7, and 12 semitones apart respectively
@@ -17,7 +17,7 @@ namespace CounterpointGenerator {
          // {8vb, lower fifth, lower fourth, upper fourth, upper fifth, 8va}
         private List<int> perfectIntervals = new List<int>(){-12, -7, -5, 5, 7, 12};
 
-        public List<int> apply(List<int> possibilities, int currentNote) {
+        public List<int> Apply(List<int> possibilities, int currentNote) {
             List<int> output = new List<int>();
             foreach (int n in possibilities) {
                 // Add checking for perfect fourth/fifth outside one octave difference?

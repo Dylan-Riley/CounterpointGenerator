@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 namespace CounterpointGenerator {
-    public class imperfectConsonanceRule: IRules {
+    public class ImperfectConsonanceRule: IRules {
         /**
          * Imperfect consonance includes second, major and minor third,
          * major and minor sixth, and seventh.
@@ -16,7 +16,7 @@ namespace CounterpointGenerator {
         //Includes one octave up or down
         private List<int> imperfectIntervals =  new List<int>(){-9, -8, -4, -3, 3, 4, 8, 9};
 
-        public List<int> apply(List<int> possibilities, int currentNote){
+        public List<int> Apply(List<int> possibilities, int currentNote){
             List<int> output = new List<int>();
             foreach (int n in possibilities) {
                 // Add checking outside one octave range?
