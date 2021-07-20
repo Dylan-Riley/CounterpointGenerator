@@ -9,27 +9,25 @@ namespace CounterpointGenerator{
          * For a note higher than the cantus firmus it must be a minor third
          */
         
-        private List<int> legalNotes = new List<int>(){-3, 3};
+        private readonly List<int> legalNotes = new List<int>(){-3, 3};
 
-        public List<int> Apply(List<int> possibilities, int currentNote, int position, int length) {
-            if (length - position == 1){
+        /**
+         * INPUTS: Possibilities, CurrentNote, Position, Length
+         */
+        public List<int> Apply(RuleInput ruleInput) {
+            if (ruleInput.Length - ruleInput.Position == 1){
                 // If we're in the penultimate note
                 List<int> output = new List<int>();
-                foreach (int n in possibilities) {
-                    if(legalNotes.Contains(n - currentNote)){
+                foreach (int n in ruleInput.Possibilities) {
+                    if(legalNotes.Contains(n - ruleInput.CurrentNote)){
                         output.Add(n);
                     }
                 }
                 return output;
             }
             else {
-                return possibilities;
+                return ruleInput.Possibilities;
             }
-        }
-
-        public List<int> Apply(List<int> possibilities, int currentNote)
-        {
-            throw new ArgumentException("Penultimate Rule needs more input!");
         }
     }
 }

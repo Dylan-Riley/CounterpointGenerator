@@ -6,12 +6,21 @@ namespace CounterpointGenerator {
     /**
      * Base interface for rules objects
      */
-    public interface IRules {
-        public List<int> Apply(List<int> possibilities, int currentNote);
+    public interface IRules
+    {
+        public List<int> Apply(RuleInput ruleInput);
     }
 
-    //TODO:
-    //Add IRuleInput interface with optional members that inherits this class
-    //Then has optional members for the different inputs of Apply
+    public class RuleInput
+    {
+        // Range of possible notes
+        public List<int> Possibilities { get; set; }
+        // Current note in generation
+        public int CurrentNote { get; set; }
+        // Current position in generation, current count of notes
+        public int Position { get; set; }
+        // Total expected length of generation
+        public int Length { get; set; }
+    }
 
 }

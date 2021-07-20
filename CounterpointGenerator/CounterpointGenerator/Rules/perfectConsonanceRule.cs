@@ -17,11 +17,14 @@ namespace CounterpointGenerator {
          // {8vb, lower fifth, lower fourth, upper fourth, upper fifth, 8va}
         private List<int> perfectIntervals = new List<int>(){-12, -7, -5, 5, 7, 12};
 
-        public List<int> Apply(List<int> possibilities, int currentNote) {
+        /**
+         * INPUTS: Possibilities, CurrentNote
+         */
+        public List<int> Apply(RuleInput ruleInput) {
             List<int> output = new List<int>();
-            foreach (int n in possibilities) {
+            foreach (int n in ruleInput.Possibilities) {
                 // Add checking for perfect fourth/fifth outside one octave difference?
-                if (perfectIntervals.Contains(n - currentNote)){
+                if (perfectIntervals.Contains(n - ruleInput.CurrentNote)){
                     //If the difference between note in possibilities n is
                     //equal to a perfect interval
                     output.Add(n);

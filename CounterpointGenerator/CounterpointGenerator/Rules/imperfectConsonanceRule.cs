@@ -14,13 +14,16 @@ namespace CounterpointGenerator {
          */
 
         //Includes one octave up or down
-        private List<int> imperfectIntervals =  new List<int>(){-9, -8, -4, -3, 3, 4, 8, 9};
+        private readonly List<int> imperfectIntervals =  new List<int>(){-9, -8, -4, -3, 3, 4, 8, 9};
 
-        public List<int> Apply(List<int> possibilities, int currentNote){
+        /**
+         * INPUTS: Possibilities, CurrentNote
+         */
+        public List<int> Apply(RuleInput ruleInput){
             List<int> output = new List<int>();
-            foreach (int n in possibilities) {
+            foreach (int n in ruleInput.Possibilities) {
                 // Add checking outside one octave range?
-                if (imperfectIntervals.Contains(n - currentNote)){
+                if (imperfectIntervals.Contains(n - ruleInput.CurrentNote)){
                     //If the difference between not in possibilities n is equal to an imperfect interval
                     output.Add(n);
                 }
