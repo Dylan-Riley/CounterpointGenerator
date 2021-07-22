@@ -15,6 +15,12 @@ namespace CounterpointGenerator
          */
         public List<int> Apply(RuleInput ruleInput)
         {
+            // Do nothing if no previous notes!
+            if (ruleInput.Position == 0)
+            {
+                return ruleInput.Possibilities;
+            }
+
             List<int> output = new List<int>(ruleInput.Possibilities);
             // Check if previous cantus stepped up
             if (ruleInput.PreviousCantus < ruleInput.CurrentNote)
