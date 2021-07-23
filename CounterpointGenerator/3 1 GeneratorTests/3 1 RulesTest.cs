@@ -25,6 +25,12 @@ namespace _3_1_GeneratorTests
 
             ImperfectConsonanceRule icr = new ImperfectConsonanceRule();
             List<int> resultRange = icr.Apply(ri);
+
+            List<int> expectedRange = new List<int>() { -9, -8, -4, -3, 3, 4, 8, 9 };
+
+            CollectionAssert.AreEquivalent(expectedRange, resultRange);
+            Console.WriteLine(string.Join(", ", expectedRange));
+            Console.WriteLine(string.Join(", ", resultRange));
         }
     }
 }

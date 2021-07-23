@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		MockOutputTranslator.cs = MockOutputTranslator.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneratorTests", "GeneratorTests\GeneratorTests.csproj", "{95BDFDB4-E202-4367-9015-9566554CBCEA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3 1 GeneratorTests", "3 1 GeneratorTests\3 1 GeneratorTests.csproj", "{B4A87820-A7FD-4926-B779-C3EB2989C96D}"
 EndProject
 Global
@@ -24,10 +22,6 @@ Global
 		{FD477AD3-8C64-48B8-863E-BF25E06D7E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD477AD3-8C64-48B8-863E-BF25E06D7E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD477AD3-8C64-48B8-863E-BF25E06D7E17}.Release|Any CPU.Build.0 = Release|Any CPU
-		{95BDFDB4-E202-4367-9015-9566554CBCEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{95BDFDB4-E202-4367-9015-9566554CBCEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{95BDFDB4-E202-4367-9015-9566554CBCEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{95BDFDB4-E202-4367-9015-9566554CBCEA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B4A87820-A7FD-4926-B779-C3EB2989C96D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B4A87820-A7FD-4926-B779-C3EB2989C96D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4A87820-A7FD-4926-B779-C3EB2989C96D}.Release|Any CPU.ActiveCfg = Release|Any CPU
