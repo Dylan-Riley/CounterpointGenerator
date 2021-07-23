@@ -1,12 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using CounterpointGenerator;
 
-namespace GeneratorTests
+namespace _3_1_GeneratorTests
 {
     [TestClass]
-    public class RulesTestOld
+    public class RulesTest
     {
         private readonly List<int> defaultPossibilities = new List<int>()
         {
@@ -19,11 +19,12 @@ namespace GeneratorTests
         {
             List<int> testRange = new List<int>(defaultPossibilities);
             int spoofCurrentNote = 0; // C5
-            RuleInput ri = new RuleInput;
+            RuleInput ri = new RuleInput();
             ri.CurrentNote = spoofCurrentNote;
-            ri.Possibilitites = testRange;
+            ri.Possibilities = testRange;
 
-            List<int> resultRange = ImperfectConsonanceRule.Apply(ri);
+            ImperfectConsonanceRule icr = new ImperfectConsonanceRule();
+            List<int> resultRange = icr.Apply(ri);
         }
     }
 }
