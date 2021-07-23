@@ -32,5 +32,23 @@ namespace _3_1_GeneratorTests
             Console.WriteLine(string.Join(", ", expectedRange));
             Console.WriteLine(string.Join(", ", resultRange));
         }
+
+        [TestMethod]
+        public void Test_PerfectConsonance()
+        {
+            List<int> testRange = new List<int>(defaultPossibilities);
+            int spoofCurrentNote = 0; //C5
+            RuleInput ri = new RuleInput();
+            ri.CurrentNote = spoofCurrentNote;
+            ri.Possibilities = testRange;
+
+            PerfectConsonanceRule pcr = new PerfectConsonanceRule();
+            List<int> resultRange = pcr.Apply(ri);
+
+            List<int> expectedRange = new List<int>(){ -12, -7, -5, 5, 7, 12 };
+            CollectionAssert.AreEquivalent(expectedRange, resultRange);
+            Console.WriteLine(string.Join(", ", expectedRange));
+            Console.WriteLine(string.Join(", ", resultRange));
+        }
     }
 }
