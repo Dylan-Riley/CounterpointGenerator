@@ -1,27 +1,41 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace CounterpointGenerator
 {
     public class MelodyLine
     {
-        public Note FirstNote { get; set; }
+        public List<Note> MelodyLine { get; set; }
+
+
+        public Note FirstNote {
+            get
+            {
+                return this.MelodyLine[0];
+            }
+        }
 
         public MelodyLine RemoveFirstNote()
         {
-            throw new NotImplementedException();
+            return this.MelodyLine.RemoveAt(0);
         }
 
         /**
          * Takes in a note.
-         * Prepends it to the melody line (making it hte new first note)
+         * Prepends it to the melody line (making it the new first note)
          * Returns the new melodyLine.
          */
-        public MelodyLine Prepend(Note firstNote)
+
+        public MelodyLine Prepend(Note firstCounterNote)
         {
-            throw new NotImplementedException();
+            return this.MelodyLine.Insert(0, firstCounterNote);
         }
 
         public MelodyLine()
         {
+            this.MelodyLine = new List<Note>();
         }
     }
+            
+        
+        
 }
