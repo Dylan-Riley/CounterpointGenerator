@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CounterpointGenerator
 {
-    class RuleApplier
+    public class RuleApplier: Rules.IRuleApplier
     {
         private List<IRules> ruleSet = new List<IRules>();
 
