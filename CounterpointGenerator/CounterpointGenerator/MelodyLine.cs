@@ -4,19 +4,19 @@ namespace CounterpointGenerator
 {
     public class MelodyLine
     {
-        public List<Note> MelodyLine { get; set; }
+        public List<Note> AMelodyLine { get; set; }
 
 
         public Note FirstNote {
             get
             {
-                return this.MelodyLine[0];
+                return this.AMelodyLine[0];
             }
         }
 
-        public MelodyLine RemoveFirstNote()
+        public void RemoveFirstNote()
         {
-            return this.MelodyLine.RemoveAt(0);
+            this.AMelodyLine.RemoveAt(0);
         }
 
         /**
@@ -25,14 +25,14 @@ namespace CounterpointGenerator
          * Returns the new melodyLine.
          */
 
-        public MelodyLine Prepend(Note firstCounterNote)
+        public void Prepend(Note firstCounterNote)
         {
-            return this.MelodyLine.Insert(0, firstCounterNote);
+            this.AMelodyLine.Insert(0, firstCounterNote);
         }
 
         public MelodyLine()
         {
-            this.MelodyLine = new List<Note>();
+            this.AMelodyLine = new List<Note>();
         }
     }
             

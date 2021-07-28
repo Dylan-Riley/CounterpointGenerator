@@ -11,7 +11,7 @@ namespace CounterpointGenerator
         /**
          * Cantus firmus.
          */
-        List<int> Cantus { get; set; }
+        List<MelodyLine> Cantus { get; set; }
 
         // Add something for the generated counterpoint.
 

@@ -11,7 +11,7 @@ namespace CounterpointGenerator
         /**
          * The cantus firmus.
          */
-        System.Collections.Generic.List<int> Cantus { get; set; }
+        MelodyLine Cantus { get; set; }
 
         //TimingPreferences
         //RulePreferences

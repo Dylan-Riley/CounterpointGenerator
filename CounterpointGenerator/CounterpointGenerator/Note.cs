@@ -3,7 +3,7 @@ namespace CounterpointGenerator
 {
     public class Note
     {
-        int Note { get; set; }
+        int NoteUnit { get; set; }
 
         /*public Note()
         {

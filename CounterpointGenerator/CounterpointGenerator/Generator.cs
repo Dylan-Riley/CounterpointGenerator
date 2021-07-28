@@ -6,7 +6,7 @@ namespace CounterpointGenerator
 {
     public class Generator: IGenerator
     {
-        IRuleApplier _applier;
+        //RuleApplier _applier;
 
         private List<MelodyLine> GenerateCounterpoint(MelodyLine inputCantusfirmus)
         {
@@ -22,16 +22,16 @@ namespace CounterpointGenerator
             IWeightSelect weightSelector = new WeightSelect();
             List<Note> subListToExplore = weightSelector.SelectPossibilities(possibilitiesAfterRules);
 
-            MelodyLine newMelodyLine = m.RemoveFirstNote();
+            m.RemoveFirstNote();
             foreach (Note p in subListToExplore)
             {
          
-                List<MelodyLine> melodyList = GenerateCounterpointForNoteStack(newMelodyLine, n, p);
+                List<MelodyLine> melodyList = GenerateCounterpointForNoteStack(m, n, p);
                 List<MelodyLine> solution = new List<MelodyLine>();
                 foreach (MelodyLine line in melodyList)
                 {
-                    MelodyLine newLine = line.Prepend(p);
-                    solution.Add(newLine);
+                    line.Prepend(p);
+                    solution.Add(line);
                 }
                 solutionList.AddRange(solution);
             }
@@ -44,11 +44,11 @@ namespace CounterpointGenerator
         {
             List<Note> possibleNotes = GenerateNoteAtRegion(n);
             List<Note> possibleNotesAfterRules = new List<Note>();
-            foreach(IRule r in Dictionary[input.userPreference])
+            /*foreach(IRules r in Dictionary[input.userPreference])
             {
                 List<Note> newPossibleNotes = r.Apply(possibleNotes);
                 possibleNotesAfterRules.AddRange(newPossibleNotes);
-            }
+            }*/
             return possibleNotesAfterRules;
         }
 
@@ -60,7 +60,7 @@ namespace CounterpointGenerator
         public Task<IOutput> Generate(IInput input)
         {
             Output generateOutput = new Output();
-            _applier.setUserPreferences(input.RulePreferences);
+            //_applier.setUserPreferences(input.RulePreferences);
             generateOutput.Cantus = GenerateCounterpoint(input.Cantus);
             return Task.FromResult<IOutput>(generateOutput);
         }
