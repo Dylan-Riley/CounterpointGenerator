@@ -25,6 +25,16 @@ namespace CounterpointGenerator {
         public Note PreviousCantus { get; set; }
         //Previous counterpoint note
         public Note PreviousCounterpoint { get; set; }
+
+        public RuleInput(List<Note> possi, Note curN, int pos, int len, Note prevCan, Note prevCou)
+        {
+            this.Possibilities = possi;
+            this.CurrentNote = curN;
+            this.Position = pos;
+            this.Length = len;
+            this.PreviousCantus = prevCan;
+            this.PreviousCounterpoint = prevCou;
+        }
     }
 
 }

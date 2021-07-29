@@ -30,6 +30,11 @@ namespace CounterpointGenerator
             this.AMelodyLine.Insert(0, firstCounterNote);
         }
 
+        public int Length()
+        {
+            return AMelodyLine.Count;
+        }
+
         public MelodyLine()
         {
             this.AMelodyLine = new List<Note>();
