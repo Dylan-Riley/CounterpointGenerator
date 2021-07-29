@@ -66,6 +66,7 @@ namespace CounterpointGenerator
             List<Note> output = new List<Note>();
             for (int addPitch = lowerPitch; addPitch <= upperPitch; addPitch++)
             {
+                // TODO: Fix for note length when that becomes something to worry about
                 output.Add(new Note(addPitch));
             }
             return output;
