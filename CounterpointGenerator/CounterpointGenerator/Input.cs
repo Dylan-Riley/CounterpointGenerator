@@ -9,7 +9,7 @@ namespace CounterpointGenerator
     public class Input: IInput
     {
         
-        public Input(List<int> cantus)
+        public Input(MelodyLine cantus)
         {
             Cantus = cantus;
         }
@@ -17,7 +17,7 @@ namespace CounterpointGenerator
         /**
          * Cantus firmus.
          */
-        public List<int> Cantus { get; set; }
+        public MelodyLine Cantus { get; set; }
 
         public override string ToString()
         {

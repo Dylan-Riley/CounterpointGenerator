@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CounterpointGenerator
@@ -20,7 +21,7 @@ namespace CounterpointGenerator
 
             Console.WriteLine("Let's just pass along the input for now.");
             var mockOutput = new Output();
-            mockOutput.Cantus = input.Cantus;
+            mockOutput.Cantus = new List<MelodyLine> { input.Cantus };
             return Task.FromResult<IOutput>(mockOutput);
         }
     }

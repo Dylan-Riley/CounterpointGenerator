@@ -12,7 +12,7 @@ namespace CounterpointGenerator
         {
         }
 
-        public List<int> Cantus { get; set; }
+        public List<MelodyLine> Cantus { get; set; }
 
         public override string ToString()
         {
