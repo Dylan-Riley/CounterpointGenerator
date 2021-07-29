@@ -3,11 +3,12 @@ namespace CounterpointGenerator
 {
     public class Note
     {
-        int NoteUnit { get; set; }
+        public int Pitch { get; set; }
+        public int Length { get; set; } = 4; //Measure in beats, default whole note
 
-        /*public Note()
+        public Note(int pitch)
         {
+            this.Pitch = pitch;
         }
-        */
     }
 }

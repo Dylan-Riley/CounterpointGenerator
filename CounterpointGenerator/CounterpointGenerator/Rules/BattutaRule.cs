@@ -13,7 +13,7 @@ namespace CounterpointGenerator
         /**
          * INPUTS: Possibilities, CurrentNote, PreviousCantus, PreviousCounterpoint
          */
-        public List<int> Apply(RuleInput ruleInput)
+        public List<Note> Apply(RuleInput ruleInput)
         {
             // Do nothing if no previous notes!
             if (ruleInput.Position == 0)
@@ -21,25 +21,29 @@ namespace CounterpointGenerator
                 return ruleInput.Possibilities;
             }
 
-            List<int> output = new List<int>(ruleInput.Possibilities);
+            List<Note> output = new List<Note>(ruleInput.Possibilities);
             // Check if previous cantus stepped up
-            if (ruleInput.PreviousCantus < ruleInput.CurrentNote)
+            if (ruleInput.PreviousCantus.Pitch < ruleInput.CurrentNote.Pitch)
             {
                 // Check if previous counterpoint was the higher voice
-                if(ruleInput.PreviousCounterpoint > ruleInput.PreviousCantus)
+                if(ruleInput.PreviousCounterpoint.Pitch > ruleInput.PreviousCantus.Pitch)
                 {
                     // Remove upper octave as a possibility
-                    output.Remove(ruleInput.CurrentNote + 13);
+                    Note removeNote = new Note(ruleInput.CurrentNote.Pitch + 13);
+                    // TODO: This probably doesn't work, recheck this
+                    output.Remove(removeNote);
                 }
             }
             // Check if previous cantus stepped down
-            else if (ruleInput.PreviousCantus > ruleInput.CurrentNote)
+            else if (ruleInput.PreviousCantus.Pitch > ruleInput.CurrentNote.Pitch)
             {
                 // Check if previous counterpoint was the lower voice
-                if(ruleInput.PreviousCounterpoint < ruleInput.PreviousCantus)
+                if(ruleInput.PreviousCounterpoint.Pitch < ruleInput.PreviousCantus.Pitch)
                 {
                     // Remove lower octave as a possibility
-                    output.Remove(ruleInput.CurrentNote - 13);
+                    Note removeNote = new Note(ruleInput.CurrentNote.Pitch - 13);
+                    // TODO: This probably doesn't work, recheck this
+                    output.Remove(removeNote);
                 }
             }
             return output;
