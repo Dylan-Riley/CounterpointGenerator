@@ -30,6 +30,7 @@ namespace CounterpointGenerator
                 {
                     // Remove upper octave as a possibility
                     Note removeNote = new Note(ruleInput.CurrentNote.Pitch + 13, ruleInput.CurrentNote.Length);
+                    // Remove all items n such that n's pitch is equal to the removeNote pitch
                     output.RemoveAll(n => n.Pitch == removeNote.Pitch);
                 }
             }
@@ -41,6 +42,7 @@ namespace CounterpointGenerator
                 {
                     // Remove lower octave as a possibility
                     Note removeNote = new Note(ruleInput.CurrentNote.Pitch - 13, ruleInput.CurrentNote.Length);
+                    // Remove all items n such that n's pitch is equal to the removeNote pitch
                     output.RemoveAll(n => n.Pitch == removeNote.Pitch);
                 }
             }
