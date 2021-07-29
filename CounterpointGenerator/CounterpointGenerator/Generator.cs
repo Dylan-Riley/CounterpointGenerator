@@ -6,7 +6,7 @@ namespace CounterpointGenerator
 {
     public class Generator: IGenerator
     {
-        private readonly RuleApplier ruleApplier;
+        private RuleApplier ruleApplier;
 
         private List<MelodyLine> GenerateCounterpoint(MelodyLine inputCantusfirmus)
         {
@@ -46,6 +46,7 @@ namespace CounterpointGenerator
             // Possibilities, currentNote, position, length, previousCantus, previousCounterpoint
             RuleInput ruleInput = new RuleInput(possibleNotes, n, generateCount, melodyLength, prevN, preCtp);
 
+            ruleApplier = new RuleApplier();
             if (ruleApplier.GenerateSet())
             {
                 ruleApplier.Applicator(ruleInput);

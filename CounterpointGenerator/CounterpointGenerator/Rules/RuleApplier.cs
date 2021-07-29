@@ -5,7 +5,12 @@ namespace CounterpointGenerator
 {
     public class RuleApplier: Rules.IRuleApplier
     {
-        private List<IRules> ruleSet = new List<IRules>();
+        private List<IRules> ruleSet;
+
+        public RuleApplier()
+        {
+            ruleSet = new List<IRules>();
+        }
 
         public Boolean GenerateSet()
         {
