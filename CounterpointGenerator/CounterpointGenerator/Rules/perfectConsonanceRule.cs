@@ -20,11 +20,11 @@ namespace CounterpointGenerator {
         /**
          * INPUTS: Possibilities, CurrentNote
          */
-        public List<int> Apply(RuleInput ruleInput) {
-            List<int> output = new List<int>();
-            foreach (int n in ruleInput.Possibilities) {
+        public List<Note> Apply(RuleInput ruleInput) {
+            List<Note> output = new List<Note>();
+            foreach (Note n in ruleInput.Possibilities) {
                 // Add checking for perfect fourth/fifth outside one octave difference?
-                if (perfectIntervals.Contains(n - ruleInput.CurrentNote)){
+                if (perfectIntervals.Contains(n.Pitch - ruleInput.CurrentNote.Pitch)){
                     //If the difference between note in possibilities n is
                     //equal to a perfect interval
                     output.Add(n);
