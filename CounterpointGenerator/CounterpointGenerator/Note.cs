@@ -10,5 +10,10 @@ namespace CounterpointGenerator
         {
             this.Pitch = pitch;
         }
+
+        public Boolean Equals(Note n)
+        {
+            return (this.Pitch == n.Pitch && this.Length == n.Length);
+        }
     }
 }
