@@ -61,8 +61,8 @@ namespace CounterpointGenerator
 
         private List<Note> GenerateNoteAtRegion(Note n)
         {
-            int upperPitch = n.Pitch + 13; // +1 octave
-            int lowerPitch = n.Pitch - 13; // -1 octave
+            int upperPitch = n.Pitch + Note.OCTAVE; // +1 octave
+            int lowerPitch = n.Pitch - Note.OCTAVE; // -1 octave
             List<Note> output = new List<Note>();
             for (int addPitch = lowerPitch; addPitch <= upperPitch; addPitch++)
             {
