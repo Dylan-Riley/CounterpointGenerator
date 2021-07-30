@@ -5,9 +5,10 @@ namespace CounterpointGenerator
     {
         int NoteUnit { get; set; }
 
-        /*public Note()
+        public Note(string item)
         {
+            NoteUnit = Int32.Parse(item);
         }
-        */
+        
     }
 }
