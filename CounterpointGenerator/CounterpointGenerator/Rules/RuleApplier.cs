@@ -21,14 +21,7 @@ namespace CounterpointGenerator
             ruleSet.Add(new BattutaRule());
 
             // Return true if all rules added
-            if (ruleSet.Count == 3)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return ruleSet.Count == 3;
         }
 
         public void Applicator (RuleInput ruleInput)
