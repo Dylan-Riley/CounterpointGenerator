@@ -10,7 +10,7 @@ namespace CounterpointGenerator{
         /**
          * INPUTS: Possibilities, CurrentNote, Position, Length
          */
-        public List<int> Apply(RuleInput ruleInput){
+        public List<Note> Apply(RuleInput ruleInput){
             if (ruleInput.Position == 0 || ruleInput.Position == ruleInput.Length){
                 // If we're in the first or last note
                 PerfectConsonanceRule reuseCode = new PerfectConsonanceRule();

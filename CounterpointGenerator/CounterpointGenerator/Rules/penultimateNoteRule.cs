@@ -9,17 +9,17 @@ namespace CounterpointGenerator{
          * For a note higher than the cantus firmus it must be a minor third
          * This means the legal note is either three semitones up or three semitones down
          */
-        private readonly List<int> legalNotes = new List<int>(){-3, 3};
+        private readonly List<int> legalIntervals = new List<int>(){-3, 3};
 
         /**
          * INPUTS: Possibilities, CurrentNote, Position, Length
          */
-        public List<int> Apply(RuleInput ruleInput) {
+        public List<Note> Apply(RuleInput ruleInput) {
             if (ruleInput.Length - ruleInput.Position == 1){
                 // If we're in the penultimate note
-                List<int> output = new List<int>();
-                foreach (int n in ruleInput.Possibilities) {
-                    if(legalNotes.Contains(n - ruleInput.CurrentNote)){
+                List<Note> output = new List<Note>();
+                foreach (Note n in ruleInput.Possibilities) {
+                    if(legalIntervals.Contains(n.Pitch - ruleInput.CurrentNote.Pitch)){
                         output.Add(n);
                     }
                 }

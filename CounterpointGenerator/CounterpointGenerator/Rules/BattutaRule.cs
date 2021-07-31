@@ -13,28 +13,32 @@ namespace CounterpointGenerator
         /**
          * INPUTS: Possibilities, CurrentNote, PreviousCantus, PreviousCounterpoint
          */
-        public List<int> Apply(RuleInput ruleInput)
+        public List<Note> Apply(RuleInput ruleInput)
         {
-            List<int> output = new List<int>(ruleInput.Possibilities);
-            // Check if previous cantus stepped up
-            if (ruleInput.PreviousCantus < ruleInput.CurrentNote)
+            // Do nothing if no previous notes!
+            if (ruleInput.Position == 0)
             {
-                // Check if previous counterpoint was the higher voice
-                if(ruleInput.PreviousCounterpoint > ruleInput.PreviousCantus)
-                {
-                    // Remove upper octave as a possibility
-                    output.Remove(ruleInput.CurrentNote + 13);
-                }
+                return ruleInput.Possibilities;
+            }
+
+            List<Note> output = new List<Note>(ruleInput.Possibilities);
+            // Check if previous cantus stepped up
+            // Check if previous counterpoint was the higher voice
+            if (ruleInput.PreviousCantus.Pitch < ruleInput.CurrentNote.Pitch && 
+                ruleInput.PreviousCounterpoint.Pitch > ruleInput.PreviousCantus.Pitch)
+            {
+                // Remove upper octave as a possibility
+                // Remove all items n such that n's pitch is equal to the removeNote pitch
+                output.RemoveAll(n => n.Pitch == ruleInput.CurrentNote.Pitch + Note.OCTAVE);
             }
             // Check if previous cantus stepped down
-            else if (ruleInput.PreviousCantus > ruleInput.CurrentNote)
+            // Check if previous counterpoint was the lower voice
+            else if (ruleInput.PreviousCantus.Pitch > ruleInput.CurrentNote.Pitch &&
+                ruleInput.PreviousCounterpoint.Pitch < ruleInput.PreviousCantus.Pitch)
             {
-                // Check if previous counterpoint was the lower voice
-                if(ruleInput.PreviousCounterpoint < ruleInput.PreviousCantus)
-                {
-                    // Remove lower octave as a possibility
-                    output.Remove(ruleInput.CurrentNote - 13);
-                }
+                // Remove lower octave as a possibility
+                // Remove all items n such that n's pitch is equal to the removeNote pitch
+                output.RemoveAll(n => n.Pitch == ruleInput.CurrentNote.Pitch - Note.OCTAVE);
             }
             return output;
         }

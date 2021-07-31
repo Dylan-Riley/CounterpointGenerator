@@ -8,23 +8,33 @@ namespace CounterpointGenerator {
      */
     public interface IRules
     {
-        public List<int> Apply(RuleInput ruleInput);
+        public List<Note> Apply(RuleInput ruleInput);
     }
 
     public class RuleInput
     {
         // Range of possible notes
-        public List<int> Possibilities { get; set; }
+        public List<Note> Possibilities { get; set; }
         // Current cantus note in generation
-        public int CurrentNote { get; set; }
+        public Note CurrentNote { get; set; }
         // Current position in generation, current count of notes
         public int Position { get; set; }
         // Total expected length of generation
         public int Length { get; set; }
         // Previous cantus note
-        public int PreviousCantus { get; set; }
+        public Note PreviousCantus { get; set; }
         //Previous counterpoint note
-        public int PreviousCounterpoint { get; set; }
+        public Note PreviousCounterpoint { get; set; }
+
+        public RuleInput(List<Note> possi, Note curN, int pos, int len, Note prevCan, Note prevCou)
+        {
+            this.Possibilities = possi;
+            this.CurrentNote = curN;
+            this.Position = pos;
+            this.Length = len;
+            this.PreviousCantus = prevCan;
+            this.PreviousCounterpoint = prevCou;
+        }
     }
 
 }

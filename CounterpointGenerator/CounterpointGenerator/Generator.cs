@@ -6,17 +6,17 @@ namespace CounterpointGenerator
 {
     public class Generator: IGenerator
     {
-        //RuleApplier _applier;
+        private RuleApplier ruleApplier;
 
         private List<MelodyLine> GenerateCounterpoint(MelodyLine inputCantusfirmus)
         {
-            return GenerateCounterpointForNoteStack(inputCantusfirmus, null, null);
+            return GenerateCounterpointForNoteStack(inputCantusfirmus, null, null, 0, inputCantusfirmus.Length());
         }
 
-        private List<MelodyLine> GenerateCounterpointForNoteStack(MelodyLine m, Note? previousNote, Note? previousCounterNote)
+        private List<MelodyLine> GenerateCounterpointForNoteStack(MelodyLine m, Note? previousNote, Note? previousCounterNote, int count, int fullLength)
         {
             Note n = m.FirstNote;
-            List<Note> possibilitiesAfterRules = CounterpointForNote(n, previousNote, previousCounterNote);
+            List<Note> possibilitiesAfterRules = CounterpointForNote(n, previousNote, previousCounterNote, fullLength, count);
 
             List<MelodyLine> solutionList = new List<MelodyLine>();
             IWeightSelect weightSelector = new WeightSelect();
@@ -26,7 +26,7 @@ namespace CounterpointGenerator
             foreach (Note p in subListToExplore)
             {
          
-                List<MelodyLine> melodyList = GenerateCounterpointForNoteStack(m, n, p);
+                List<MelodyLine> melodyList = GenerateCounterpointForNoteStack(m, n, p, count + 1, fullLength);
                 List<MelodyLine> solution = new List<MelodyLine>();
                 foreach (MelodyLine line in melodyList)
                 {
@@ -40,21 +40,36 @@ namespace CounterpointGenerator
 
         }
 
-        private List<Note> CounterpointForNote(Note n, Note prevN, Note preCtp)
+        private List<Note> CounterpointForNote(Note n, Note prevN, Note preCtp, int melodyLength, int generateCount)
         {
             List<Note> possibleNotes = GenerateNoteAtRegion(n);
-            List<Note> possibleNotesAfterRules = new List<Note>();
-            /*foreach(IRules r in Dictionary[input.userPreference])
+            // Possibilities, currentNote, position, length, previousCantus, previousCounterpoint
+            RuleInput ruleInput = new RuleInput(possibleNotes, n, generateCount, melodyLength, prevN, preCtp);
+
+            ruleApplier = new RuleApplier();
+            if (ruleApplier.GenerateSet())
             {
-                List<Note> newPossibleNotes = r.Apply(possibleNotes);
-                possibleNotesAfterRules.AddRange(newPossibleNotes);
-            }*/
-            return possibleNotesAfterRules;
+                ruleApplier.Applicator(ruleInput);
+            }
+            else
+            {
+                throw new Exception("Ruleset did not generate properly!");
+            }
+
+            return ruleInput.Possibilities;
         }
 
         private List<Note> GenerateNoteAtRegion(Note n)
         {
-            throw new NotImplementedException();
+            int upperPitch = n.Pitch + Note.OCTAVE; // +1 octave
+            int lowerPitch = n.Pitch - Note.OCTAVE; // -1 octave
+            List<Note> output = new List<Note>();
+            for (int addPitch = lowerPitch; addPitch <= upperPitch; addPitch++)
+            {
+                // TODO: Fix for note length when that becomes something to worry about
+                output.Add(new Note(addPitch));
+            }
+            return output;
         }
 
         public Task<IOutput> Generate(IInput input)
