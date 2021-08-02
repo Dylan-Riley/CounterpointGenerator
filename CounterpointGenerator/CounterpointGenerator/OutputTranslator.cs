@@ -3,9 +3,6 @@ using System.Threading.Tasks;
 
 namespace CounterpointGenerator
 {
-    /**
-     * instantiated of OutputTranslator.
-     */
     public class OutputTranslator : IOutputTranslator
     {
         public OutputTranslator()

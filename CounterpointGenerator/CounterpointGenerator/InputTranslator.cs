@@ -21,6 +21,9 @@ namespace CounterpointGenerator
             Console.WriteLine(Input.ToString());
             return Task.FromResult<IInput>(Input);
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
     }
 }
