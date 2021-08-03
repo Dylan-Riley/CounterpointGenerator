@@ -19,11 +19,11 @@ namespace CounterpointGenerator {
         /**
          * INPUTS: Possibilities, CurrentNote
          */
-        public List<int> Apply(RuleInput ruleInput){
-            List<int> output = new List<int>();
-            foreach (int n in ruleInput.Possibilities) {
+        public List<Note> Apply(RuleInput ruleInput){
+            List<Note> output = new List<Note>();
+            foreach (Note n in ruleInput.Possibilities) {
                 // Add checking outside one octave range?
-                if (imperfectIntervals.Contains(n - ruleInput.CurrentNote)){
+                if (imperfectIntervals.Contains(n.Pitch - ruleInput.CurrentNote.Pitch)){
                     //If the difference between not in possibilities n is equal to an imperfect interval
                     output.Add(n);
                 }
