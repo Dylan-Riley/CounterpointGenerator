@@ -19,8 +19,11 @@ namespace CounterpointGenerator
             List<Note> possibilitiesAfterRules = CounterpointForNote(n, previousNote, previousCounterNote, fullLength, count);
 
             List<MelodyLine> solutionList = new List<MelodyLine>();
-            IWeightSelect weightSelector = new WeightSelect();
-            List<Note> subListToExplore = weightSelector.SelectPossibilities(possibilitiesAfterRules);
+
+            // Rules need a RuleInput object input to function
+            RuleInput ri = new RuleInput(possibilitiesAfterRules, n, count, fullLength, previousNote, previousCounterNote);
+            IWeightSelect weightSelector = new WeightSelect(ri);
+            List<Note> subListToExplore = weightSelector.SelectPossibilities();
 
             m.RemoveFirstNote();
             foreach (Note p in subListToExplore)
