@@ -35,6 +35,11 @@ namespace CounterpointGenerator {
             this.PreviousCantus = prevCan;
             this.PreviousCounterpoint = prevCou;
         }
+
+        public RuleInput()
+        {
+            // Empty constructor
+        }
     }
 
 }

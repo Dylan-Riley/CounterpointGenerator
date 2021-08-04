@@ -3,12 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.810.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CounterpointGenerator", "CounterpointGenerator\CounterpointGenerator.csproj", "{FD477AD3-8C64-48B8-863E-BF25E06D7E17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CounterpointGenerator", "CounterpointGenerator\CounterpointGenerator.csproj", "{FD477AD3-8C64-48B8-863E-BF25E06D7E17}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7F5CEE9E-B16A-4AC5-8345-BBBFE72485D6}"
 	ProjectSection(SolutionItems) = preProject
 		MockOutputTranslator.cs = MockOutputTranslator.cs
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3 1 GeneratorTests", "3 1 GeneratorTests\3 1 GeneratorTests.csproj", "{B4A87820-A7FD-4926-B779-C3EB2989C96D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +22,10 @@ Global
 		{FD477AD3-8C64-48B8-863E-BF25E06D7E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD477AD3-8C64-48B8-863E-BF25E06D7E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD477AD3-8C64-48B8-863E-BF25E06D7E17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4A87820-A7FD-4926-B779-C3EB2989C96D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4A87820-A7FD-4926-B779-C3EB2989C96D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4A87820-A7FD-4926-B779-C3EB2989C96D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4A87820-A7FD-4926-B779-C3EB2989C96D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
