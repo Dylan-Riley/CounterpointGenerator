@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+
 namespace CounterpointGenerator
 {
     public class MelodyLine
@@ -39,8 +41,12 @@ namespace CounterpointGenerator
         {
             this.AMelodyLine = new List<Note>();
         }
+
+        public MelodyLine(List<Note> listOfNotes)
+        {
+            this.AMelodyLine = listOfNotes;
+        }
+
     }
-            
-        
-        
+
 }

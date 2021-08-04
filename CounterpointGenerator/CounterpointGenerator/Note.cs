@@ -24,5 +24,6 @@ namespace CounterpointGenerator
         {
             return (this.Pitch == n.Pitch && this.Length == n.Length);
         }
+
     }
 }
