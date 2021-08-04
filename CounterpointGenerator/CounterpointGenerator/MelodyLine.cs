@@ -42,11 +42,9 @@ namespace CounterpointGenerator
             this.AMelodyLine = new List<Note>();
         }
 
-        public MelodyLine(string cantus)
+        public MelodyLine(List<Note> listOfNotes)
         {
-            this.AMelodyLine = cantus.Split(' ')
-                .Select(item => new Note(item))
-                .ToList();
+            this.AMelodyLine = listOfNotes;
         }
 
     }

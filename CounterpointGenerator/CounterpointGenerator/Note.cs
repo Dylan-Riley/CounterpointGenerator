@@ -6,11 +6,6 @@ namespace CounterpointGenerator
         // One octave is thirteen semitones
         public static int OCTAVE = 13;
 
-        public Note(string item)
-        {
-            Pitch = Int32.Parse(item);
-        }
-
         public int Pitch { get; set; }
         public int Length { get; set; } = 4; //Measure in beats, default whole note
 

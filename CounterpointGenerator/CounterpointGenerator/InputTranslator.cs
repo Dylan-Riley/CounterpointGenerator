@@ -16,8 +16,17 @@ namespace CounterpointGenerator
         public Task<IInput> GetInput()
         {
             Console.WriteLine("Input Acceptor(Insert a melodyline): ");
-            MelodyLine InputString = new MelodyLine(Console.ReadLine());
-            var Input = new Input(InputString);
+
+            string InputString = Console.ReadLine();
+            List<Note> InputList = new List<Note>();
+
+            foreach(string s in InputString.Split(' '))
+            {
+                // TODO: Change when input changes drastically
+                InputList.Add(new Note(Int32.Parse(s)));
+            }
+
+            var Input = new Input(new MelodyLine(InputList));
             Console.WriteLine(Input.ToString());
             return Task.FromResult<IInput>(Input);
         }
