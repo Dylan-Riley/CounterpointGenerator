@@ -24,7 +24,7 @@ namespace CounterpointGenerator
 
         private IRules PickBetweenTwo(IRules ruleA, int ruleAChance, IRules ruleB)
         {
-            // Given two rules and the chance for one or the other (out of 100), pick one at random
+            // Given two rules and the chance for one (out of 100), pick one at random
             int pickChance = _rnd.Next(1, 101);
             if (pickChance <= ruleAChance)
             {
