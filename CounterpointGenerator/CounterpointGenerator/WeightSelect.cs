@@ -7,6 +7,7 @@ namespace CounterpointGenerator
     {
         public WeightSelect()
         {
+            // TODO: Add handling of user input
         }
 
         public List<Note> SelectPossibilities(List<Note> posibilities)
