@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CounterpointGenerator
 {
-    class BattutaRule : IRules
+    public class BattutaRule : IRules
     {
         /**
          * An octave cannot be met by stepping down in the higher voice and up in the lower voice
