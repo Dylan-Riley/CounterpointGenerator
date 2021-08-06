@@ -151,6 +151,10 @@ namespace _3_1_GeneratorTests
         [TestMethod]
         public void Test_Penultimate()
         {
+
+            //TODO: This needs to be redone because some stuff changed in the meeting
+
+
             List<Note> testRange = new List<Note>(defaultNoteList);
             Note spoofCurrentNote = new Note(0); //C5
 
