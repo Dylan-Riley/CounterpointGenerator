@@ -17,9 +17,10 @@ namespace CounterpointGenerator
         public List<Note> SelectPossibilities()
         {
             // 80% of the time pick an imperfect consonance 
-            IRules perfectOrImperfect = PickBetweenTwo(new ImperfectConsonanceRule(), 80,
-                                                        new PerfectConsonanceRule());
-            return perfectOrImperfect.Apply(this.ri);
+            //IRules perfectOrImperfect = PickBetweenTwo(new ImperfectConsonanceRule(), 80,
+            //                                            new PerfectConsonanceRule());
+            //return perfectOrImperfect.Apply(this.ri);
+            return ri.Possibilities;
         }
 
         private IRules PickBetweenTwo(IRules ruleA, int ruleAChance, IRules ruleB)

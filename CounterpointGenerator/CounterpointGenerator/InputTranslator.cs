@@ -23,7 +23,7 @@ namespace CounterpointGenerator
             foreach(string s in InputString.Split(' '))
             {
                 // TODO: Change when input changes drastically
-                InputList.Add(new Note(Int32.Parse(s)));
+                InputList.Add(new Note(int.Parse(s)));
             }
 
             var Input = new Input(new MelodyLine(InputList));
