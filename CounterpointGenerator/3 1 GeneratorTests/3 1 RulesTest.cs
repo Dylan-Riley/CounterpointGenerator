@@ -147,5 +147,35 @@ namespace _3_1_GeneratorTests
             // Did nothing happen?
             CollectionAssert.AreEquivalent(cantusDown.Possibilities, cantDwnResultNote2);
         }
+
+        [TestMethod]
+        public void Test_Penultimate()
+        {
+            List<Note> testRange = new List<Note>(defaultNoteList);
+            Note spoofCurrentNote = new Note(0); //C5
+
+            // First, out of position test
+            RuleInput ri = new RuleInput
+            {
+                CurrentNote = spoofCurrentNote,
+                Possibilities = testRange,
+                Position = 0,
+                Length = 10
+            };
+
+            PenultimateNoteRule pnr = new PenultimateNoteRule();
+            List<Note> outOfPositionResult = pnr.Apply(ri);
+            // Did nothing happen?
+            CollectionAssert.AreEquivalent(testRange, outOfPositionResult);
+
+            // Set the position to be in the correct space
+            ri.Position = 9;
+            List<Note> resultRangeNote = pnr.Apply(ri);
+
+            List<int> expectedRange = new List<int>() { -3, 3 };
+            List<int> resultRange = new List<int>(resultRangeNote.Select(n => n.Pitch));
+            CollectionAssert.AreEquivalent(expectedRange, resultRange);
+
+        }
     }
 }
