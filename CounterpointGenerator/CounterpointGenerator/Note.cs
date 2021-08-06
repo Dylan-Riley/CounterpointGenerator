@@ -25,5 +25,9 @@ namespace CounterpointGenerator
             return (this.Pitch == n.Pitch && this.Length == n.Length);
         }
 
+        public override string ToString()
+        {
+            return $"(pitch: {Pitch}, length: {Length})";
+        }
     }
 }

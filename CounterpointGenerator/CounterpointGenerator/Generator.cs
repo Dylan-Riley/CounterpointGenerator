@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CounterpointGenerator
@@ -10,7 +11,7 @@ namespace CounterpointGenerator
 
         private List<MelodyLine> GenerateCounterpoint(MelodyLine inputCantusfirmus)
         {
-            return GenerateCounterpointForNoteStack(inputCantusfirmus, null, null, 0, inputCantusfirmus.Length());
+            return GenerateCounterpointForNoteStack(inputCantusfirmus, null, null, 0, inputCantusfirmus.Length()-1);
         }
 
         private List<MelodyLine> GenerateCounterpointForNoteStack(MelodyLine m, Note? previousNote, Note? previousCounterNote, int count, int fullLength)
@@ -25,11 +26,19 @@ namespace CounterpointGenerator
             IWeightSelect weightSelector = new WeightSelect(ri);
             List<Note> subListToExplore = weightSelector.SelectPossibilities();
 
+            if (fullLength == count)
+            {
+                return subListToExplore
+                    .Select(note => new MelodyLine(new List<Note> { note }))
+                    .ToList();
+            }
+
             m.RemoveFirstNote();
+            
             foreach (Note p in subListToExplore)
             {
-         
-                List<MelodyLine> melodyList = GenerateCounterpointForNoteStack(m, n, p, count + 1, fullLength);
+
+                List<MelodyLine> melodyList = GenerateCounterpointForNoteStack(new MelodyLine(m.AMelodyLine), n, p, count + 1, fullLength);
                 List<MelodyLine> solution = new List<MelodyLine>();
                 foreach (MelodyLine line in melodyList)
                 {

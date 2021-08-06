@@ -16,7 +16,7 @@ namespace CounterpointGenerator
 
         public override string ToString()
         {
-            return string.Join(", ", Cantus);
+            return Cantus.Count + "\n" + string.Join("\n", Cantus);
         }
     }
 }

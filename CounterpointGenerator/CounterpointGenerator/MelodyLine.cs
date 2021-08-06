@@ -44,7 +44,12 @@ namespace CounterpointGenerator
 
         public MelodyLine(List<Note> listOfNotes)
         {
-            this.AMelodyLine = listOfNotes;
+            this.AMelodyLine = new List<Note>(listOfNotes);
+        }
+
+        public override string ToString()
+        {
+            return string.Join(", ", AMelodyLine);
         }
 
     }
