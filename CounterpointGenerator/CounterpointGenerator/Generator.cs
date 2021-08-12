@@ -14,19 +14,27 @@ namespace CounterpointGenerator
             return GenerateCounterpointForNoteStack(inputCantusfirmus, null, null, 0, inputCantusfirmus.Length()-1);
         }
 
-        private List<MelodyLine> GenerateCounterpointForNoteStack(MelodyLine m, Note? previousNote, Note? previousCounterNote, int count, int fullLength)
+        private List<MelodyLine> GenerateCounterpointForNoteStack(MelodyLine m, Note? previousNote, Note? previousCounterNote, int count, int endOn)
         {
             Note n = m.FirstNote;
-            List<Note> possibilitiesAfterRules = CounterpointForNote(n, previousNote, previousCounterNote, fullLength, count);
+            List<Note> possibilitiesAfterRules = CounterpointForNote(n, previousNote, previousCounterNote, endOn, count);
 
             List<MelodyLine> solutionList = new List<MelodyLine>();
 
             // Rules need a RuleInput object input to function
-            RuleInput ri = new RuleInput(possibilitiesAfterRules, n, count, fullLength, previousNote, previousCounterNote);
+            RuleInput ri = new RuleInput
+            {
+                Possibilities = possibilitiesAfterRules,
+                CurrentNote = n,
+                Position = count,
+                EndOn = endOn,
+                PreviousCantus = previousNote,
+                PreviousCounterpoint = previousCounterNote
+            };
             IWeightSelect weightSelector = new WeightSelect(ri);
             List<Note> subListToExplore = weightSelector.SelectPossibilities();
 
-            if (fullLength == count)
+            if (endOn == count)
             {
                 return subListToExplore
                     .Select(note => new MelodyLine(new List<Note> { note }))
@@ -52,11 +60,19 @@ namespace CounterpointGenerator
 
         }
 
-        private List<Note> CounterpointForNote(Note n, Note prevN, Note preCtp, int melodyLength, int generateCount)
+        private List<Note> CounterpointForNote(Note n, Note prevN, Note preCtp, int endOn, int generateCount)
         {
             List<Note> possibleNotes = GenerateNoteAtRegion(n);
-            // Possibilities, currentNote, position, length, previousCantus, previousCounterpoint
-            RuleInput ruleInput = new RuleInput(possibleNotes, n, generateCount, melodyLength, prevN, preCtp);
+
+            RuleInput ruleInput = new RuleInput
+            {
+                Possibilities = possibleNotes,
+                CurrentNote = n,
+                Position = generateCount,
+                EndOn = endOn,
+                PreviousCantus = prevN,
+                PreviousCounterpoint = preCtp
+            };
 
             ruleApplier = new RuleApplier();
             if (ruleApplier.GenerateSet())
@@ -73,6 +89,7 @@ namespace CounterpointGenerator
 
         private List<Note> GenerateNoteAtRegion(Note n)
         {
+            // Only make notes from the correct intervals in the first place
             List<int> intervals = new List<int>(Constants.PERFECT_INTERVALS);
             intervals.AddRange(Constants.IMPERFECT_INTERVALS);
 

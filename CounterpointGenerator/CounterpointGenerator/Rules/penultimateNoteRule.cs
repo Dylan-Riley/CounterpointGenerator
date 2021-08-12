@@ -19,7 +19,7 @@ namespace CounterpointGenerator{
          * INPUTS: Possibilities, CurrentNote, Position, Length
          */
         public List<Note> Apply(RuleInput ruleInput) {
-            if (ruleInput.Length - ruleInput.Position == 1){
+            if (ruleInput.EndOn - ruleInput.Position == 1){
                 // If we're in the penultimate note
                 List<Note> output = new List<Note>();
                 foreach (Note n in ruleInput.Possibilities) {
