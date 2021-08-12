@@ -46,7 +46,7 @@ namespace CounterpointGenerator
             foreach (Note p in subListToExplore)
             {
 
-                List<MelodyLine> melodyList = GenerateCounterpointForNoteStack(new MelodyLine(m.AMelodyLine), n, p, count + 1, fullLength);
+                List<MelodyLine> melodyList = GenerateCounterpointForNoteStack(new MelodyLine(m.AMelodyLine), n, p, count + 1, endOn);
                 List<MelodyLine> solution = new List<MelodyLine>();
                 foreach (MelodyLine line in melodyList)
                 {
