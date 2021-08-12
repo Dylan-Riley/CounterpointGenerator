@@ -73,13 +73,15 @@ namespace CounterpointGenerator
 
         private List<Note> GenerateNoteAtRegion(Note n)
         {
-            int upperPitch = n.Pitch + Note.OCTAVE; // +1 octave
-            int lowerPitch = n.Pitch - Note.OCTAVE; // -1 octave
+            List<int> intervals = new List<int>(Constants.PERFECT_INTERVALS);
+            intervals.AddRange(Constants.IMPERFECT_INTERVALS);
+
             List<Note> output = new List<Note>();
-            for (int addPitch = lowerPitch; addPitch <= upperPitch; addPitch++)
+
+            foreach (int interval in intervals)
             {
                 // TODO: Fix for note length when that becomes something to worry about
-                output.Add(new Note(addPitch));
+                output.Add(new Note(n.Pitch + interval));
             }
             return output;
         }
