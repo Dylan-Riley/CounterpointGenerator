@@ -13,9 +13,9 @@ namespace CounterpointGenerator {
          * down the fifth and fourth are reversed
          */
 
-         //Includes one octave up or down
-         // {8vb, lower fifth, lower fourth, upper fourth, upper fifth, 8va}
-        private List<int> perfectIntervals = new List<int>(){-12, -7, -5, 5, 7, 12};
+        //Includes one octave up or down
+        // {8vb, lower fifth, lower fourth, upper fourth, upper fifth, 8va}
+        private List<int> perfectIntervals = new List<int>(Constants.PERFECT_INTERVALS);
 
         /**
          * INPUTS: Possibilities, CurrentNote

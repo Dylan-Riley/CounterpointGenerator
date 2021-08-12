@@ -9,7 +9,11 @@ namespace CounterpointGenerator{
          * For a note higher than the cantus firmus it must be a minor third
          * This means the legal note is either three semitones up or three semitones down
          */
-        private readonly List<int> legalIntervals = new List<int>(){-3, 3};
+        private readonly List<int> legalIntervals = new List<int>()
+        {
+            Constants.LOWER_MAJOR_SIXTH,
+            Constants.UPPER_MINOR_THIRD
+        };
 
         /**
          * INPUTS: Possibilities, CurrentNote, Position, Length

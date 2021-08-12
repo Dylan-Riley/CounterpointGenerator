@@ -30,6 +30,16 @@ namespace CounterpointGenerator
         public static int UPPER_FIFTH = 7;
         public static int LOWER_FIFTH = -5;
 
+        public static readonly List<int> PERFECT_INTERVALS = new List<int>()
+        {
+            OCTAVE_DOWN,
+            LOWER_FIFTH,
+            LOWER_FOURTH,
+            UPPER_FOURTH,
+            UPPER_FIFTH,
+            OCTAVE
+        };
+
         // IMPERFECT
         public static int UPPER_MINOR_THIRD = 3;
         public static int LOWER_MINOR_THIRD = -9;
@@ -39,5 +49,17 @@ namespace CounterpointGenerator
         public static int LOWER_MINOR_SIXTH = -4;
         public static int UPPER_MAJOR_SIXTH = 9;
         public static int LOWER_MAJOR_SIXTH = -3;
+
+        public static readonly List<int> IMPERFECT_INTERVALS = new List<int>()
+        {
+            LOWER_MINOR_THIRD,
+            LOWER_MAJOR_THIRD,
+            LOWER_MINOR_SIXTH,
+            LOWER_MAJOR_SIXTH,
+            UPPER_MINOR_THIRD,
+            UPPER_MAJOR_THIRD,
+            UPPER_MINOR_SIXTH,
+            UPPER_MAJOR_SIXTH
+        };
     }
 }
