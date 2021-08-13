@@ -14,7 +14,7 @@ namespace CounterpointGenerator {
          */
 
         //Includes one octave up or down
-        private readonly List<int> imperfectIntervals =  new List<int>(){-9, -8, -4, -3, 3, 4, 8, 9};
+        private readonly List<int> imperfectIntervals =  new List<int>(Constants.IMPERFECT_INTERVALS);
 
         /**
          * INPUTS: Possibilities, CurrentNote

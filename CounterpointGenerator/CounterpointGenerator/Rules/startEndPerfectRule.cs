@@ -11,7 +11,7 @@ namespace CounterpointGenerator{
          * INPUTS: Possibilities, CurrentNote, Position, Length
          */
         public List<Note> Apply(RuleInput ruleInput){
-            if (ruleInput.Position == 0 || ruleInput.Position == ruleInput.Length){
+            if (ruleInput.Position == 0 || ruleInput.Position == ruleInput.EndOn){
                 // If we're in the first or last note
                 PerfectConsonanceRule reuseCode = new PerfectConsonanceRule();
                 return reuseCode.Apply(ruleInput);

@@ -29,7 +29,7 @@ namespace CounterpointGenerator
             {
                 // Remove upper octave as a possibility
                 // Remove all items n such that n's pitch is equal to the removeNote pitch
-                output.RemoveAll(n => n.Pitch == ruleInput.CurrentNote.Pitch + Note.OCTAVE);
+                output.RemoveAll(n => n.Pitch == ruleInput.CurrentNote.Pitch + Constants.OCTAVE);
             }
             // Check if previous cantus stepped down
             // Check if previous counterpoint was the lower voice
@@ -38,7 +38,7 @@ namespace CounterpointGenerator
             {
                 // Remove lower octave as a possibility
                 // Remove all items n such that n's pitch is equal to the removeNote pitch
-                output.RemoveAll(n => n.Pitch == ruleInput.CurrentNote.Pitch - Note.OCTAVE);
+                output.RemoveAll(n => n.Pitch == ruleInput.CurrentNote.Pitch - Constants.OCTAVE);
             }
             return output;
         }
