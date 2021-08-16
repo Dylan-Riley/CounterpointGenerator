@@ -43,7 +43,7 @@ namespace CounterpointGenerator
                 else
                 {
                     failCount++; // Preemptively increment this
-                    foreach(Note n in selectFrom)
+                    foreach(Note n in mutate)
                     {
                         if (Constants.PERFECT_INTERVALS.Contains(n.Pitch))
                         {
