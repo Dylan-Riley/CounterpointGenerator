@@ -12,6 +12,7 @@ namespace CounterpointGenerator
          * The cantus firmus.
          */
         MelodyLine Cantus { get; set; }
+        double userPreference { get; set; }
 
         //TimingPreferences
         //RulePreferences

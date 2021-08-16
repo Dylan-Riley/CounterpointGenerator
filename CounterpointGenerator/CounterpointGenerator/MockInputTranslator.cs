@@ -17,7 +17,7 @@ namespace CounterpointGenerator
         {
             Console.WriteLine("Input: unimplemented. Just press any key.");
             Console.ReadKey();
-            var mockInput = new Input(new MelodyLine());
+            var mockInput = new Input(new MelodyLine(), Input.DEFAULT_PREFERENCE);
             Console.WriteLine("Let's pretend this was the input:");
             Console.WriteLine(mockInput.ToString());
             return Task.FromResult<IInput>(mockInput);
