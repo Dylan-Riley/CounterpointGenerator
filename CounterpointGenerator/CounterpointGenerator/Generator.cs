@@ -8,6 +8,12 @@ namespace CounterpointGenerator
     public class Generator: IGenerator
     {
         private RuleApplier ruleApplier;
+        private IWeightSelect _weightSelector;
+
+        public Generator(IWeightSelect weightSelector)
+        {
+            _weightSelector = weightSelector;
+        }
 
         private List<MelodyLine> GenerateCounterpoint(MelodyLine inputCantusfirmus)
         {
@@ -21,6 +27,7 @@ namespace CounterpointGenerator
 
             List<MelodyLine> solutionList = new List<MelodyLine>();
 
+            /*
             // Rules need a RuleInput object input to function
             RuleInput ri = new RuleInput
             {
@@ -31,8 +38,9 @@ namespace CounterpointGenerator
                 PreviousCantus = previousNote,
                 PreviousCounterpoint = previousCounterNote
             };
-            IWeightSelect weightSelector = new WeightSelect(ri);
-            List<Note> subListToExplore = weightSelector.SelectPossibilities();
+            */
+            
+            List<Note> subListToExplore = _weightSelector.SelectPossibilities(possibilitiesAfterRules);
 
             if (endOn == count)
             {
