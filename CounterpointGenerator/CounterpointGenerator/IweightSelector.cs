@@ -5,6 +5,6 @@ namespace CounterpointGenerator
 {
     public interface IWeightSelect
     {
-        public List<Note> SelectPossibilities(List<Note> selectFrom);
+        public List<Note> SelectPossibilities(List<Note> selectFrom, Note currentNote);
     }
 }

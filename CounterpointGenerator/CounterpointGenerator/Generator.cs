@@ -40,7 +40,8 @@ namespace CounterpointGenerator
             };
             */
             
-            List<Note> subListToExplore = _weightSelector.SelectPossibilities(possibilitiesAfterRules);
+            // weightSelector needs at least the current note so the interval math can be checked
+            List<Note> subListToExplore = _weightSelector.SelectPossibilities(possibilitiesAfterRules, n);
 
             if (endOn == count)
             {

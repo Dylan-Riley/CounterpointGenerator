@@ -10,7 +10,7 @@ namespace CounterpointGenerator
         public int maximumCount { get; set; } = 5;
         public int maximumFail { get; set; } = 5;
 
-        public List<Note> SelectPossibilities(List<Note> selectFrom)
+        public List<Note> SelectPossibilities(List<Note> selectFrom, Note currentNote)
         {
             if (selectFrom.Count <= maximumCount)
             {
@@ -31,7 +31,7 @@ namespace CounterpointGenerator
                     failCount++; // Preemptively increment this
                     foreach(Note n in mutate)
                     {
-                        if (Constants.IMPERFECT_INTERVALS.Contains(n.Pitch))
+                        if (Constants.IMPERFECT_INTERVALS.Contains(n.Pitch - currentNote.Pitch))
                         {
                             output.Add(n);
                             mutate.Remove(n);
@@ -45,7 +45,7 @@ namespace CounterpointGenerator
                     failCount++; // Preemptively increment this
                     foreach(Note n in mutate)
                     {
-                        if (Constants.PERFECT_INTERVALS.Contains(n.Pitch))
+                        if (Constants.PERFECT_INTERVALS.Contains(n.Pitch - currentNote.Pitch))
                         {
                             output.Add(n);
                             mutate.Remove(n);
