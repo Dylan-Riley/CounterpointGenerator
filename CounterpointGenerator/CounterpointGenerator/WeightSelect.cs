@@ -20,6 +20,7 @@ namespace CounterpointGenerator
 
             List<Note> output = new List<Note>();
             List<Note> mutate = new List<Note>(selectFrom);
+            Shuffle(mutate);
             int failCount = 0;
 
             while(output.Count <= maximumCount)
@@ -66,6 +67,21 @@ namespace CounterpointGenerator
             }
 
             return output;
+        }
+
+        private void Shuffle<T>(IList<T> list)
+        {
+            // Shuffle method based on Fisher-Yates shuffle
+            // Shamelessly stolen from https://stackoverflow.com/questions/273313/randomize-a-listt
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = _rnd.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
         }
     }
 }
