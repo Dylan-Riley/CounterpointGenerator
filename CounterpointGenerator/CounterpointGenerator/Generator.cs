@@ -26,19 +26,6 @@ namespace CounterpointGenerator
             List<Note> possibilitiesAfterRules = CounterpointForNote(n, previousNote, previousCounterNote, endOn, count);
 
             List<MelodyLine> solutionList = new List<MelodyLine>();
-
-            /*
-            // Rules need a RuleInput object input to function
-            RuleInput ri = new RuleInput
-            {
-                Possibilities = possibilitiesAfterRules,
-                CurrentNote = n,
-                Position = count,
-                EndOn = endOn,
-                PreviousCantus = previousNote,
-                PreviousCounterpoint = previousCounterNote
-            };
-            */
             
             // weightSelector needs at least the current note so the interval math can be checked
             List<Note> subListToExplore = _weightSelector.SelectPossibilities(possibilitiesAfterRules, n);

@@ -7,8 +7,13 @@ namespace CounterpointGenerator
     public class WeightSelect: IWeightSelect
     {
         private Random _rnd = new Random();
+        
+        // Maximum number of notes to select into
         public int maximumCount { get; set; } = 5;
+        // Maximum number of times the select if statements can fail to find anything before hard picking something
         public int maximumFail { get; set; } = 5;
+        // Chance that Imperfect Consonance is selected
+        public int imperfectChance { get; set; } = 75;
 
         public List<Note> SelectPossibilities(List<Note> selectFrom, Note currentNote)
         {
@@ -27,32 +32,32 @@ namespace CounterpointGenerator
             {
                 int chance = _rnd.Next(1, 101);
 
-                if(chance <= 75)
+                if(chance <= imperfectChance)
                 {
-                    failCount++; // Preemptively increment this
-                    foreach(Note n in mutate)
+                    Note n = mutate.Find(note => Constants.IMPERFECT_INTERVALS.Contains(note.Pitch - currentNote.Pitch));
+                    if(n == null)
                     {
-                        if (Constants.IMPERFECT_INTERVALS.Contains(n.Pitch - currentNote.Pitch))
-                        {
-                            output.Add(n);
-                            mutate.Remove(n);
-                            failCount = 0; // Reset to 0 on successful
-                            break;
-                        }
+                        failCount++;
+                    }
+                    else
+                    {
+                        output.Add(n);
+                        mutate.Remove(n);
+                        failCount = 0;
                     }
                 }
                 else
                 {
-                    failCount++; // Preemptively increment this
-                    foreach(Note n in mutate)
+                    Note n = mutate.Find(note => Constants.PERFECT_INTERVALS.Contains(note.Pitch - currentNote.Pitch));
+                    if(n == null)
                     {
-                        if (Constants.PERFECT_INTERVALS.Contains(n.Pitch - currentNote.Pitch))
-                        {
-                            output.Add(n);
-                            mutate.Remove(n);
-                            failCount = 0; // Reset to 0 on successful
-                            break;
-                        }
+                        failCount++;
+                    }
+                    else
+                    {
+                        output.Add(n);
+                        mutate.Remove(n);
+                        failCount = 0;
                     }
                 }
 
