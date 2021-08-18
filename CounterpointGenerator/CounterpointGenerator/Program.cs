@@ -24,7 +24,8 @@ namespace CounterpointGenerator
                             // For now, registering mocks.
                             .AddSingleton<IInputTranslator, InputTranslator>()
                             .AddSingleton<IGenerator, Generator>()
-                            .AddSingleton<IOutputTranslator, OutputTranslator>());
+                            .AddSingleton<IOutputTranslator, OutputTranslator>()
+                            .AddSingleton<IWeightSelect, WeightSelect>());
         // Let's make everything a singleton for now.
         // Depending on the implementation might make sense to have generator be transient.
 
