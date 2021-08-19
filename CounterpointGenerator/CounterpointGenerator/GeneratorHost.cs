@@ -45,6 +45,7 @@ namespace CounterpointGenerator
         {
             // Consider adding graceful stopping on cancellation request.
             var input = await _inputTranslator.GetInput();
+
             var output = await _generator.Generate(input);
             await _outputTranslator.TranslateOutput(output);
         }

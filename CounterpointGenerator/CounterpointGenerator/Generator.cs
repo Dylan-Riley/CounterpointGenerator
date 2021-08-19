@@ -9,18 +9,19 @@ namespace CounterpointGenerator
     {
         private RuleApplier ruleApplier;
         private IWeightSelect _weightSelector;
+        private double startTime;
 
         public Generator(IWeightSelect weightSelector)
         {
             _weightSelector = weightSelector;
         }
 
-        private List<MelodyLine> GenerateCounterpoint(MelodyLine inputCantusfirmus)
+        private List<MelodyLine> GenerateCounterpoint(MelodyLine inputCantusfirmus, double preferDuration)
         {
-            return GenerateCounterpointForNoteStack(inputCantusfirmus, null, null, 0, inputCantusfirmus.Length()-1);
+            return GenerateCounterpointForNoteStack(inputCantusfirmus, null, null, 0, inputCantusfirmus.Length()-1, preferDuration);
         }
 
-        private List<MelodyLine> GenerateCounterpointForNoteStack(MelodyLine m, Note? previousNote, Note? previousCounterNote, int count, int endOn)
+        private List<MelodyLine> GenerateCounterpointForNoteStack(MelodyLine m, Note? previousNote, Note? previousCounterNote, int count, int endOn, double duration)
         {
             Note n = m.FirstNote;
             List<Note> possibilitiesAfterRules = CounterpointForNote(n, previousNote, previousCounterNote, endOn, count);
@@ -30,7 +31,7 @@ namespace CounterpointGenerator
             // weightSelector needs at least the current note so the interval math can be checked
             List<Note> subListToExplore = _weightSelector.SelectPossibilities(possibilitiesAfterRules, n);
 
-            if (endOn == count)
+            if (endOn == count || new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() - startTime >= duration * 1000)
             {
                 return subListToExplore
                     .Select(note => new MelodyLine(new List<Note> { note }))
@@ -41,8 +42,7 @@ namespace CounterpointGenerator
             
             foreach (Note p in subListToExplore)
             {
-
-                List<MelodyLine> melodyList = GenerateCounterpointForNoteStack(new MelodyLine(m.AMelodyLine), n, p, count + 1, endOn);
+                List<MelodyLine> melodyList = GenerateCounterpointForNoteStack(new MelodyLine(m.AMelodyLine), n, p, count + 1, endOn, duration);
                 List<MelodyLine> solution = new List<MelodyLine>();
                 foreach (MelodyLine line in melodyList)
                 {
@@ -51,9 +51,9 @@ namespace CounterpointGenerator
                 }
                 solutionList.AddRange(solution);
             }
-
+        
             return solutionList;
-
+            
         }
 
         private List<Note> CounterpointForNote(Note n, Note prevN, Note preCtp, int endOn, int generateCount)
@@ -101,9 +101,10 @@ namespace CounterpointGenerator
 
         public Task<IOutput> Generate(IInput input)
         {
+            startTime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
             Output generateOutput = new Output();
             //_applier.setUserPreferences(input.RulePreferences);
-            generateOutput.Cantus = GenerateCounterpoint(input.Cantus);
+            generateOutput.Cantus = GenerateCounterpoint(input.Cantus, input.userPreference);
             return Task.FromResult<IOutput>(generateOutput);
         }
     }
