@@ -37,6 +37,7 @@ namespace CounterpointGenerator
 
                 if (outerSplit.Length == 1)
                 {
+                    // If the split fails to actually split on anything
                     MelodyInvalid();
                 }
                 else
@@ -47,6 +48,7 @@ namespace CounterpointGenerator
 
                         if (innerSplit.Length != 2)
                         {
+                            // If invalid input leaves innerSplit with too many items but would still pass tryparses
                             MelodyInvalid();
                             break;
                         }
@@ -61,27 +63,17 @@ namespace CounterpointGenerator
                             break;
                         }
 
+                        // TryParse sets the value of these variables on success
                         inputList.Add(new Note(newPitch, newDuration));
 
                         if (inputList.Count == outerSplit.Length)
                         {
+                            // End condition, handled everything in input
                             checkMelody = false;
                         }
                     }
                 }
             }
-
-
-            /*
-            string InputString = Console.ReadLine();
-            
-            List<Note> InputList = new List<Note>();
-            foreach(string s in InputString.Split(' '))
-            {
-                // TODO: Change when input changes drastically
-                InputList.Add(new Note(int.Parse(s)));
-            }
-            */
 
             // Generation time input
             Console.WriteLine("Insert a prefered generating duration(in seconds): ");
@@ -104,7 +96,8 @@ namespace CounterpointGenerator
                 }
                 else
                 {
-                    Console.WriteLine("That is not a valid double for time in seconds! Try again!");
+                    Console.WriteLine("That is not a valid double for time in seconds!");
+                    Console.WriteLine("Insert a prefered generating duration(in seconds): ");
                 }
             }
 
