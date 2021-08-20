@@ -12,7 +12,7 @@ namespace CounterpointGenerator
             this.Pitch = pitch;
         }
 
-        public Note(int pitch, int length)
+        public Note(int pitch, double length)
         {
             this.Pitch = pitch;
             this.Length = length;

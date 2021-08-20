@@ -13,6 +13,13 @@ namespace CounterpointGenerator
         {
         }
 
+        private void MelodyInvalid()
+        {
+            Console.WriteLine("Melody line input not valid");
+            Console.WriteLine("Expected \"int pitch space double duration\" separated by commas!");
+            Console.WriteLine("Insert a MelodyLine: ");
+        }
+
         public Task<IInput> GetInput()
         {
             // Melody Line input
@@ -20,6 +27,49 @@ namespace CounterpointGenerator
             Console.WriteLine("Insert a MelodyLine: ");
             // Input expected to be something like "0 16, 0 16, 0 16"
             // (int space double comma space)* (int space double)
+            bool checkMelody = true;
+            List<Note> inputList = new List<Note>();
+            while (checkMelody)
+            {
+                inputList.Clear();
+                string melodyInput = Console.ReadLine();
+                string[] outerSplit = melodyInput.Split(", ");
+
+                if (outerSplit.Length == 1)
+                {
+                    MelodyInvalid();
+                }
+                else
+                {
+                    foreach (string s in outerSplit)
+                    {
+                        string[] innerSplit = s.Split(' ');
+                        int newPitch;
+                        double newDuration;
+
+                        if (!int.TryParse(innerSplit[0], out newPitch))
+                        {
+                            MelodyInvalid();
+                            break;
+                        }
+                        if (!Double.TryParse(innerSplit[1], out newDuration))
+                        {
+                            MelodyInvalid();
+                            break;
+                        }
+
+                        inputList.Add(new Note(newPitch, newDuration));
+
+                        if (inputList.Count == outerSplit.Length)
+                        {
+                            checkMelody = false;
+                        }
+                    }
+                }
+            }
+
+
+            /*
             string InputString = Console.ReadLine();
             
             List<Note> InputList = new List<Note>();
@@ -28,14 +78,15 @@ namespace CounterpointGenerator
                 // TODO: Change when input changes drastically
                 InputList.Add(new Note(int.Parse(s)));
             }
+            */
 
             // Generation time input
             Console.WriteLine("Insert a prefered generating duration(in seconds): ");
-            string inputPreference = Console.ReadLine();
             double userPreference = 0;
             bool checkTime = true;
             while (checkTime)
             {
+                string inputPreference = Console.ReadLine();
                 if (inputPreference == "")
                 {
                     // Catch this first as it does weird things with TryParse
@@ -54,7 +105,7 @@ namespace CounterpointGenerator
                 }
             }
 
-            var input = new Input(new MelodyLine(InputList), userPreference);
+            var input = new Input(new MelodyLine(inputList), userPreference);
             Console.WriteLine(input.ToString());
             return Task.FromResult<IInput>(input);
         }
