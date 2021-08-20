@@ -45,6 +45,11 @@ namespace CounterpointGenerator
                     {
                         string[] innerSplit = s.Split(' ');
 
+                        if (innerSplit.Length != 2)
+                        {
+                            MelodyInvalid();
+                            break;
+                        }
                         if (!int.TryParse(innerSplit[0], out int newPitch))
                         {
                             MelodyInvalid();
