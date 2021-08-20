@@ -31,9 +31,16 @@ namespace CounterpointGenerator
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            while (!cancellationToken.IsCancellationRequested)
+            try
             {
-                await RunGenerator();                  
+                while (!cancellationToken.IsCancellationRequested)
+                {
+                    await RunGenerator();
+                }
+            }
+            catch(TaskCanceledException)
+            {
+                Console.WriteLine("Thanks!");
             }
         }
 

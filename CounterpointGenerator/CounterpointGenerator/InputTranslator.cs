@@ -33,6 +33,12 @@ namespace CounterpointGenerator
             {
                 inputList.Clear();
                 string melodyInput = Console.ReadLine();
+
+                if(melodyInput == "quit" || melodyInput == "exit" || melodyInput == "q")
+                {
+                    throw new TaskCanceledException();
+                }
+
                 string[] outerSplit = melodyInput.Split(", ");
 
                 if (outerSplit.Length == 1)
