@@ -44,15 +44,13 @@ namespace CounterpointGenerator
                     foreach (string s in outerSplit)
                     {
                         string[] innerSplit = s.Split(' ');
-                        int newPitch;
-                        double newDuration;
 
-                        if (!int.TryParse(innerSplit[0], out newPitch))
+                        if (!int.TryParse(innerSplit[0], out int newPitch))
                         {
                             MelodyInvalid();
                             break;
                         }
-                        if (!Double.TryParse(innerSplit[1], out newDuration))
+                        if (!Double.TryParse(innerSplit[1], out double newDuration))
                         {
                             MelodyInvalid();
                             break;
