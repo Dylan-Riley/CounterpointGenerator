@@ -23,7 +23,7 @@ namespace CounterpointGenerator
         public Task<IInput> GetInput()
         {
             // Melody Line input
-            Console.WriteLine("Input Acceptor: ");
+            Console.WriteLine("Input Acceptor: Type \"quit\" to quit");
             Console.WriteLine("Insert a MelodyLine: ");
             // Input expected to be something like "0 16, 0 16, 0 16"
             // (int space double comma space)* (int space double)
