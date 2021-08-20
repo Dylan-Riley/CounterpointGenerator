@@ -8,7 +8,6 @@ namespace CounterpointGenerator
      */
     public class Input: IInput
     {
-        public static double DEFAULT_PREFERENCE = 10;
         public Input(MelodyLine cantus, double preference)
         {
             Cantus = cantus;

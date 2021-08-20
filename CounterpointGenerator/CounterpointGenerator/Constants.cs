@@ -68,5 +68,9 @@ namespace CounterpointGenerator
             UPPER_MINOR_SIXTH,
             UPPER_MAJOR_SIXTH
         };
+
+        // Default max time to generate
+        // Moved from Input.cs
+        public static double DEFAULT_TIME_LIMIT = 10.0;
     }
 }
