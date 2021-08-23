@@ -37,6 +37,16 @@ namespace CounterpointGenerator
             return AMelodyLine.Count;
         }
 
+        public double BeatCount()
+        {
+            double runningTotal = 0.0;
+            foreach(Note n in AMelodyLine)
+            {
+                runningTotal += n.Length;
+            }
+            return runningTotal;
+        }
+
         public MelodyLine()
         {
             this.AMelodyLine = new List<Note>();
