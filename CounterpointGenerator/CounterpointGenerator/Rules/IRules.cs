@@ -19,9 +19,6 @@ namespace CounterpointGenerator {
         // Current cantus note in generation
         public Note CurrentNote { get; set; } = null;
 
-        // Next note to check
-        public Note NextNote { get; set; } = null;
-
         // Duration of new note to add
         public double NewNoteLength { get; set; }
 
