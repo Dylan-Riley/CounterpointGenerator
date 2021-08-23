@@ -9,12 +9,17 @@ namespace CounterpointGenerator
         // REFERENCE NOTE
         public static int C5 = 0;
 
-        // LENGTH OF A WHOLE NOTE
+        // NOTE LENGTHS
         /*
          * Sixteenth notes are a good reasonable "smallest unit"
          * with lower double values available for even smaller if needed
+         * Adjust WHOLE_NOTE_LENGTH to change math for all lengths
          */
         public static double WHOLE_NOTE_LENGTH = 16.0;
+        public static double HALF_NOTE_LENGTH = WHOLE_NOTE_LENGTH / 2;
+        public static double QUARTER_NOTE_LENGTH = HALF_NOTE_LENGTH / 2;
+        public static double EIGHTH_NOTE_LENGTH = QUARTER_NOTE_LENGTH / 2;
+        public static double SIXTEENTH_NOTE_LENGTH = EIGHTH_NOTE_LENGTH / 2;
 
         // INTERVALS
         /*

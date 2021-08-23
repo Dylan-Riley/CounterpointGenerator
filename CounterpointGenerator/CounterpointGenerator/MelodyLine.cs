@@ -21,12 +21,22 @@ namespace CounterpointGenerator
             this.AMelodyLine.RemoveAt(0);
         }
 
+        public Note PeekSecondNote()
+        {
+            if(this.AMelodyLine.Count < 2)
+            {
+                return null;
+            }
+            else
+            {
+                return AMelodyLine[1];
+            }
+        }
+
         /**
          * Takes in a note.
          * Prepends it to the melody line (making it the new first note)
-         * Returns the new melodyLine.
          */
-
         public void Prepend(Note firstCounterNote)
         {
             this.AMelodyLine.Insert(0, firstCounterNote);
@@ -34,11 +44,15 @@ namespace CounterpointGenerator
 
         public int Length()
         {
+            // NOT the length as in beats
+            // Number of notes in the melody line
             return AMelodyLine.Count;
         }
 
         public double BeatCount()
         {
+            // HAS NOTHING TO DO WITH number of notes
+            // Total duration of all notes in melody line
             double runningTotal = 0.0;
             foreach(Note n in AMelodyLine)
             {

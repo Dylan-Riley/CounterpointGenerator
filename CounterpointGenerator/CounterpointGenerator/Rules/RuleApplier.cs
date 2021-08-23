@@ -26,10 +26,18 @@ namespace CounterpointGenerator
 
         public void Applicator (RuleInput ruleInput)
         {
-            // Mutate ruleInput.Possibilities, result and logic will need testing
             foreach (IRules r in ruleSet)
             {
                 ruleInput.Possibilities = r.Apply(ruleInput);
+            }
+
+            if (ruleInput.NextNote != null && ruleInput.NewNoteLength > ruleInput.CurrentNote.Length)
+            {
+                ruleInput.CurrentNote = ruleInput.NextNote;
+                foreach (IRules r in ruleSet)
+                {
+                    ruleInput.Possibilities = r.Apply(ruleInput);
+                }
             }
         }
     }

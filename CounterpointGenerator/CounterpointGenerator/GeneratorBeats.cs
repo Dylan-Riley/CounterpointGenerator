@@ -41,8 +41,11 @@ namespace CounterpointGenerator
 
         private List<MelodyLine> RecursiveGenerateCounterpoint(RecursiveInput recursiveInput)
         {
+            /*
+             * Get the current note in the cantus firmus
+             * Decide on a length for a new note
+             */
             Note currentNote = recursiveInput.CantusFirmus.FirstNote;
-            // TODO: UNFINISHED
         }
 
         public Task<IOutput> Generate(IInput input)
