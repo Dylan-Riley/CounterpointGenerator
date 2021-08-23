@@ -30,15 +30,6 @@ namespace CounterpointGenerator
             {
                 ruleInput.Possibilities = r.Apply(ruleInput);
             }
-
-            if (ruleInput.NextNote != null && ruleInput.NewNoteLength > ruleInput.CurrentNote.Length)
-            {
-                ruleInput.CurrentNote = ruleInput.NextNote;
-                foreach (IRules r in ruleSet)
-                {
-                    ruleInput.Possibilities = r.Apply(ruleInput);
-                }
-            }
         }
     }
 }
