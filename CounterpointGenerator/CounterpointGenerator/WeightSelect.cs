@@ -88,5 +88,57 @@ namespace CounterpointGenerator
                 list[n] = value;
             }
         }
+
+        // Adjust these to adjust note length weighting
+        public int wholeNoteWeight { get; set; } = 10;
+        public int halfNoteWeight { get; set; } = 30;
+        public int quarterNoteWeight { get; set; } = 20;
+        public int eightthNoteWeight { get; set; } = 5;
+        public int sixteenthNoteWeight { get; set; } = 2;
+
+        public double GetRandomNoteLength()
+        {
+            List<WeightedItem> lengths = new List<WeightedItem>()
+            {
+                new WeightedItem(Constants.WHOLE_NOTE_LENGTH, wholeNoteWeight),
+                new WeightedItem(Constants.HALF_NOTE_LENGTH, halfNoteWeight),
+                new WeightedItem(Constants.QUARTER_NOTE_LENGTH, quarterNoteWeight),
+                new WeightedItem(Constants.EIGHTH_NOTE_LENGTH, eightthNoteWeight),
+                new WeightedItem(Constants.SIXTEENTH_NOTE_LENGTH, sixteenthNoteWeight)
+            };
+
+            int totalWeight = 0;
+            foreach(WeightedItem i in lengths)
+            {
+                totalWeight += i.Weight;
+            }
+
+            int rnd = _rnd.Next(0, totalWeight);
+            double output = 0;
+
+            foreach(WeightedItem i in lengths)
+            {
+                if(rnd < i.Weight)
+                {
+                    output = i.Value;
+                    break;
+                }
+                rnd -= i.Weight;
+            }
+
+            return output;
+        }
+
+        private struct WeightedItem
+        {
+            public double Value { get; }
+            public int Weight { get; }
+
+            public WeightedItem(double value, int weight)
+            {
+                this.Value = value;
+                this.Weight = weight;
+            }
+        }
     }
 }

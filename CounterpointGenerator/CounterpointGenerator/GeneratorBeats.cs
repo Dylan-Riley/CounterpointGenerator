@@ -16,7 +16,7 @@ namespace CounterpointGenerator
             _weightSelector = ws;
         }
 
-        private class RecursiveInput
+        private class RecursiveParameters
         {
             internal MelodyLine CantusFirmus { get; set; }
             internal Note PreviousNote { get; set; } = null;
@@ -29,23 +29,23 @@ namespace CounterpointGenerator
 
         private List<MelodyLine> GenerateCounterpoint(MelodyLine inputCantusFirmus, double duration)
         {
-            RecursiveInput ri = new RecursiveInput
+            RecursiveParameters rp = new RecursiveParameters
             {
                 CantusFirmus = inputCantusFirmus,
                 EndOn = inputCantusFirmus.Length() - 1,
                 TotalNoteLength = inputCantusFirmus.BeatCount(),
                 Duration = duration
             };
-            return RecursiveGenerateCounterpoint(ri);
+            return RecursiveGenerateCounterpoint(rp);
         }
 
-        private List<MelodyLine> RecursiveGenerateCounterpoint(RecursiveInput recursiveInput)
+        private List<MelodyLine> RecursiveGenerateCounterpoint(RecursiveParameters recurPara)
         {
             /*
              * Get the current note in the cantus firmus
              * Decide on a length for a new note
              */
-            Note currentNote = recursiveInput.CantusFirmus.FirstNote;
+            Note currentNote = recurPara.CantusFirmus.FirstNote;
         }
 
         public Task<IOutput> Generate(IInput input)
