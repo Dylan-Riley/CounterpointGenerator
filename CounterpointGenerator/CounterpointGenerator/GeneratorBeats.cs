@@ -42,6 +42,7 @@ namespace CounterpointGenerator
         private List<MelodyLine> RecursiveGenerateCounterpoint(RecursiveParameters recurPara)
         {
             Note currentNote = recurPara.CantusFirmus.FirstNote;
+            double newNoteDuration = _weightSelector.GetRandomNoteLength();
             
         }
 
