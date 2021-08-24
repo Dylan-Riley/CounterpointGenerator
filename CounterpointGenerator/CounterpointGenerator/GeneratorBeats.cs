@@ -41,11 +41,28 @@ namespace CounterpointGenerator
 
         private List<MelodyLine> RecursiveGenerateCounterpoint(RecursiveParameters recurPara)
         {
-            /*
-             * Get the current note in the cantus firmus
-             * Decide on a length for a new note
-             */
             Note currentNote = recurPara.CantusFirmus.FirstNote;
+            
+        }
+
+        private List<int> UseRules(RecursiveParameters recurPara, Note currentNote, double newNoteDuration)
+        {
+            
+        }
+
+        private List<Note> GenerateIntervalRegion (Note currentNote, double newNoteDuration)
+        {
+            List<int> intervals = new List<int>(Constants.PERFECT_INTERVALS);
+            intervals.AddRange(Constants.IMPERFECT_INTERVALS);
+
+            List<Note> output = new List<Note>();
+
+            foreach(int interval in intervals)
+            {
+                output.Add(new Note(currentNote.Pitch + interval, newNoteDuration));
+            }
+
+            return output;
         }
 
         public Task<IOutput> Generate(IInput input)
