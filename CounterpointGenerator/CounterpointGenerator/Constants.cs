@@ -77,5 +77,8 @@ namespace CounterpointGenerator
         // Default max time to generate
         // Moved from Input.cs
         public static double DEFAULT_TIME_LIMIT = 10.0;
+
+        // Number of initial random notes to generate before rules
+        public static int GIVE_ME_LOTS_OF_NOTES = 300;
     }
 }

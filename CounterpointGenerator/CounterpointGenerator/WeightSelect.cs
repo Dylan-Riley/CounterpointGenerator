@@ -130,7 +130,7 @@ namespace CounterpointGenerator
         }
 
         // Do not set below 12!
-        public int weightModifier { get; set; } = 15;
+        public int weightModifier { get; set; } = 17;
 
         public int GetRandomIntervalFrom(Note n)
         {

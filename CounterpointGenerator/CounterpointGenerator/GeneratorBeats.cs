@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace CounterpointGenerator
 {
@@ -23,7 +24,8 @@ namespace CounterpointGenerator
             internal Note PreviousCounterpointNote { get; set; } = null;
             internal int Count { get; set; } = 0;
             internal int EndOn { get; set; }
-            internal double TotalNoteLength { get; set; }
+            internal double BeatCount { get; set; } = 0;
+            internal double TotalBeatCount { get; set; }
             internal double Duration { get; set; }
         }
 
@@ -33,7 +35,7 @@ namespace CounterpointGenerator
             {
                 CantusFirmus = inputCantusFirmus,
                 EndOn = inputCantusFirmus.Length() - 1,
-                TotalNoteLength = inputCantusFirmus.BeatCount(),
+                TotalBeatCount = inputCantusFirmus.BeatCount(),
                 Duration = duration
             };
             return RecursiveGenerateCounterpoint(rp);
@@ -42,27 +44,86 @@ namespace CounterpointGenerator
         private List<MelodyLine> RecursiveGenerateCounterpoint(RecursiveParameters recurPara)
         {
             Note currentNote = recurPara.CantusFirmus.FirstNote;
-            double newNoteDuration = _weightSelector.GetRandomNoteLength();
-            
-        }
+            List<Note> possibilitiesBeforeRules = GenerateStartingNotes(currentNote);
+            List<Note> possibilitiesAfterRules = UseRules(recurPara, possibilitiesBeforeRules, currentNote);
 
-        private List<int> UseRules(RecursiveParameters recurPara, Note currentNote, double newNoteDuration)
-        {
-            
-        }
+            List<MelodyLine> solutionList = new List<MelodyLine>();
 
-        private List<Note> GenerateIntervalRegion (Note currentNote, double newNoteDuration)
-        {
-            List<int> intervals = new List<int>(Constants.PERFECT_INTERVALS);
-            intervals.AddRange(Constants.IMPERFECT_INTERVALS);
+            List<Note> subListToExplore = _weightSelector.SelectPossibilities(possibilitiesAfterRules, currentNote);
 
-            List<Note> output = new List<Note>();
-
-            foreach(int interval in intervals)
+            if(recurPara.BeatCount == recurPara.TotalBeatCount ||
+                new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() - startTime >= recurPara.Duration * 1000)
             {
-                output.Add(new Note(currentNote.Pitch + interval, newNoteDuration));
+                return subListToExplore
+                    .Select(note => new MelodyLine(new List<Note> { note }))
+                    .ToList();
             }
 
+            recurPara.CantusFirmus.RemoveFirstNote();
+
+            foreach(Note explore in subListToExplore)
+            {
+
+                List<MelodyLine> melodyList = RecursiveGenerateCounterpoint(new RecursiveParameters()
+                {
+                    CantusFirmus = recurPara.CantusFirmus,
+                    PreviousNote = currentNote,
+                    PreviousCounterpointNote = explore,
+                    Count = recurPara.Count + 1,
+                    EndOn = recurPara.EndOn,
+                    BeatCount = recurPara.BeatCount + explore.Length,
+                    TotalBeatCount = recurPara.TotalBeatCount,
+                    Duration = recurPara.Duration
+                });
+
+                List<MelodyLine> solution = new List<MelodyLine>();
+                foreach (MelodyLine line in melodyList)
+                {
+                    line.Prepend(explore);
+                    solution.Add(line);
+                }
+                solutionList.AddRange(solution);
+            }
+
+            return solutionList;
+
+        }
+
+        private List<Note> UseRules(RecursiveParameters recurPara, List<Note> possibleNotes, Note currentNote)
+        {
+            // Add more RuleInput below as needed
+            // Will likely need fields for current beat count and total beat count
+            RuleInput ri = new RuleInput()
+            {
+                Possibilities = possibleNotes,
+                CurrentNote = currentNote,
+                Position = recurPara.Count,
+                EndOn = recurPara.EndOn,
+                PreviousCantus = recurPara.PreviousNote,
+                PreviousCounterpoint = recurPara.PreviousCounterpointNote
+            };
+
+            ruleApplier = new RuleApplier();
+            if (ruleApplier.GenerateSet())
+            {
+                ruleApplier.Applicator(ri);
+            }
+            else
+            {
+                throw new Exception("Ruleset did not generate properly!");
+            }
+
+            return ri.Possibilities;
+        }
+
+        private List<Note> GenerateStartingNotes (Note currentNote)
+        {
+            List<Note> output = new List<Note>();
+            for(int i = 0; i < Constants.GIVE_ME_LOTS_OF_NOTES; i++)
+            {
+                output.Add(new Note(_weightSelector.GetRandomIntervalFrom(currentNote),
+                                    _weightSelector.GetRandomNoteLength()));
+            }
             return output;
         }
 
