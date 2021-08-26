@@ -129,6 +129,45 @@ namespace CounterpointGenerator
             return output;
         }
 
+        // Do not set below 12!
+        public int weightModifier { get; set; } = 15;
+
+        public int GetRandomIntervalFrom(Note n)
+        {
+            if(weightModifier < 12)
+            {
+                throw new Exception("Setting weight modifier below 12 will break things");
+            }
+
+            List<WeightedItem> weightedIntervals = new List<WeightedItem>();
+            // Build a weighted list of intervals where the larger the interval the smaller the weight
+            foreach(int interval in Constants.PERFECT_INTERVALS.Concat(Constants.IMPERFECT_INTERVALS))
+            {
+                weightedIntervals.Add(new WeightedItem(interval + n.Pitch, weightModifier - Math.Abs(interval)));
+            }
+
+            int totalWeight = 0;
+            foreach(WeightedItem wi in weightedIntervals)
+            {
+                totalWeight += wi.Weight;
+            }
+
+            int rnd = _rnd.Next(0, totalWeight);
+            int output = -1000;
+
+            foreach(WeightedItem wi in weightedIntervals)
+            {
+                if(rnd < wi.Weight)
+                {
+                    output = (int) wi.Value;
+                    break;
+                }
+                rnd -= wi.Weight;
+            }
+
+            return output;
+        }
+
         private struct WeightedItem
         {
             public double Value { get; }
