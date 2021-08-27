@@ -22,8 +22,6 @@ namespace CounterpointGenerator
             internal MelodyLine CantusFirmus { get; set; }
             internal Note PreviousNote { get; set; } = null;
             internal Note PreviousCounterpointNote { get; set; } = null;
-            internal int Count { get; set; } = 0;
-            internal int EndOn { get; set; }
             internal double BeatCount { get; set; } = 0;
             internal double TotalBeatCount { get; set; }
             internal double Duration { get; set; }
@@ -34,7 +32,6 @@ namespace CounterpointGenerator
             RecursiveParameters rp = new RecursiveParameters
             {
                 CantusFirmus = inputCantusFirmus,
-                EndOn = inputCantusFirmus.Length() - 1,
                 TotalBeatCount = inputCantusFirmus.BeatCount(),
                 Duration = duration
             };
@@ -63,15 +60,11 @@ namespace CounterpointGenerator
 
             foreach(Note explore in subListToExplore)
             {
-                // TODO: Rename Count and figure a way to only update it after moving an entire note
-                //       through the cantus firmus?
                 List<MelodyLine> melodyList = RecursiveGenerateCounterpoint(new RecursiveParameters()
                 {
                     CantusFirmus = recurPara.CantusFirmus,
                     PreviousNote = currentNote,
                     PreviousCounterpointNote = explore,
-                    Count = recurPara.Count + 1,
-                    EndOn = recurPara.EndOn,
                     BeatCount = recurPara.BeatCount + explore.Length,
                     TotalBeatCount = recurPara.TotalBeatCount,
                     Duration = recurPara.Duration
@@ -96,10 +89,9 @@ namespace CounterpointGenerator
             // Will likely need fields for current beat count and total beat count
             RuleInput ri = new RuleInput()
             {
+                // TODO: RuleInput and rules need adjusting to work on beat count
                 Possibilities = possibleNotes,
                 CurrentNote = currentNote,
-                Position = recurPara.Count,
-                EndOn = recurPara.EndOn,
                 PreviousCantus = recurPara.PreviousNote,
                 PreviousCounterpoint = recurPara.PreviousCounterpointNote
             };
