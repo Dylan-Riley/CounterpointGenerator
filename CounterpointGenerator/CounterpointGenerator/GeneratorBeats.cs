@@ -63,7 +63,8 @@ namespace CounterpointGenerator
 
             foreach(Note explore in subListToExplore)
             {
-
+                // TODO: Rename Count and figure a way to only update it after moving an entire note
+                //       through the cantus firmus?
                 List<MelodyLine> melodyList = RecursiveGenerateCounterpoint(new RecursiveParameters()
                 {
                     CantusFirmus = recurPara.CantusFirmus,

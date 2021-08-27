@@ -91,9 +91,12 @@ namespace CounterpointGenerator
 
         // Adjust these to adjust note length weighting
         public int wholeNoteWeight { get; set; } = 10;
+        public int dottedHalfWeight { get; set; } = 15;
         public int halfNoteWeight { get; set; } = 30;
         public int quarterNoteWeight { get; set; } = 20;
-        public int eightthNoteWeight { get; set; } = 5;
+        public int dottedQuarterWeight { get; set; } = 10;
+        public int eighthNoteWeight { get; set; } = 5;
+        public int dottedEighthWeight { get; set; } = 2;
         public int sixteenthNoteWeight { get; set; } = 2;
 
         public double GetRandomNoteLength()
@@ -101,9 +104,12 @@ namespace CounterpointGenerator
             List<WeightedItem> lengths = new List<WeightedItem>()
             {
                 new WeightedItem(Constants.WHOLE_NOTE_LENGTH, wholeNoteWeight),
+                new WeightedItem(Constants.HALF_NOTE_LENGTH + Constants.QUARTER_NOTE_LENGTH, dottedHalfWeight),
                 new WeightedItem(Constants.HALF_NOTE_LENGTH, halfNoteWeight),
+                new WeightedItem(Constants.QUARTER_NOTE_LENGTH + Constants.EIGHTH_NOTE_LENGTH, dottedQuarterWeight),
                 new WeightedItem(Constants.QUARTER_NOTE_LENGTH, quarterNoteWeight),
-                new WeightedItem(Constants.EIGHTH_NOTE_LENGTH, eightthNoteWeight),
+                new WeightedItem(Constants.EIGHTH_NOTE_LENGTH + Constants.SIXTEENTH_NOTE_LENGTH, dottedEighthWeight),
+                new WeightedItem(Constants.EIGHTH_NOTE_LENGTH, eighthNoteWeight),
                 new WeightedItem(Constants.SIXTEENTH_NOTE_LENGTH, sixteenthNoteWeight)
             };
 
