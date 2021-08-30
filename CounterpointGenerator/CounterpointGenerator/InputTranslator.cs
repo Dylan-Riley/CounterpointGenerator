@@ -52,19 +52,24 @@ namespace CounterpointGenerator
                     {
                         string[] innerSplit = s.Split(' ');
 
+                        /*
+                         * In the TryParse checking to collapse them & needs to be used instead of &&
+                         * in order to make sure newPitch and newDuration get fully declared and can be used later
+                         * 
+                         * If length checking is also collapsed into this single if statement there is then
+                         * a possible IndexOutOfBounds which I don't want to deal with so it needs to be its
+                         * own check first that happens before TryParse and won't allow them to run if failed
+                         */
                         if (innerSplit.Length != 2)
                         {
-                            // If invalid input leaves innerSplit with too many items but would still pass tryparses
+                            // If the split ends in too many or too few values
                             MelodyInvalid();
                             break;
                         }
-                        if (!int.TryParse(innerSplit[0], out int newPitch))
+                        if(  !int.TryParse(innerSplit[0], out int newPitch)
+                           & !Double.TryParse(innerSplit[1], out double newDuration))
                         {
-                            MelodyInvalid();
-                            break;
-                        }
-                        if (!Double.TryParse(innerSplit[1], out double newDuration))
-                        {
+                            // Or either value cannot be parsed
                             MelodyInvalid();
                             break;
                         }
