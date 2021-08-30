@@ -17,7 +17,7 @@ namespace CounterpointGenerator
             _weightSelector = ws;
         }
 
-        private class RecursiveParameters
+        private class GenerateCounterpointImplParameters
         {
             internal MelodyLine CantusFirmus { get; set; }
             internal Note PreviousNote { get; set; } = null;
@@ -29,16 +29,16 @@ namespace CounterpointGenerator
 
         private List<MelodyLine> GenerateCounterpoint(MelodyLine inputCantusFirmus, double duration)
         {
-            RecursiveParameters rp = new RecursiveParameters
+            GenerateCounterpointImplParameters para = new GenerateCounterpointImplParameters
             {
                 CantusFirmus = inputCantusFirmus,
                 TotalBeatCount = inputCantusFirmus.BeatCount(),
                 Duration = duration
             };
-            return RecursiveGenerateCounterpoint(rp);
+            return GenerateCounterpointImpl(para);
         }
 
-        private List<MelodyLine> RecursiveGenerateCounterpoint(RecursiveParameters recurPara)
+        private List<MelodyLine> GenerateCounterpointImpl(GenerateCounterpointImplParameters recurPara)
         {
             Note currentNote = recurPara.CantusFirmus.FirstNote;
             List<Note> possibilitiesBeforeRules = GenerateStartingNotes(currentNote);
@@ -60,7 +60,7 @@ namespace CounterpointGenerator
 
             foreach(Note explore in subListToExplore)
             {
-                List<MelodyLine> melodyList = RecursiveGenerateCounterpoint(new RecursiveParameters()
+                List<MelodyLine> melodyList = GenerateCounterpointImpl(new GenerateCounterpointImplParameters()
                 {
                     CantusFirmus = recurPara.CantusFirmus,
                     PreviousNote = currentNote,
@@ -83,7 +83,7 @@ namespace CounterpointGenerator
 
         }
 
-        private List<Note> UseRules(RecursiveParameters recurPara, List<Note> possibleNotes, Note currentNote)
+        private List<Note> UseRules(GenerateCounterpointImplParameters recurPara, List<Note> possibleNotes, Note currentNote)
         {
             // Add more RuleInput below as needed
             // Will likely need fields for current beat count and total beat count
