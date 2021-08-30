@@ -21,18 +21,6 @@ namespace CounterpointGenerator
             this.AMelodyLine.RemoveAt(0);
         }
 
-        public Note PeekSecondNote()
-        {
-            if(this.AMelodyLine.Count < 2)
-            {
-                return null;
-            }
-            else
-            {
-                return AMelodyLine[1];
-            }
-        }
-
         /**
          * Takes in a note.
          * Prepends it to the melody line (making it the new first note)
