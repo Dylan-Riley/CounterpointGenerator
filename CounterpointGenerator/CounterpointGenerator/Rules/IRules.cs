@@ -15,18 +15,24 @@ namespace CounterpointGenerator {
     {
         // Range of possible notes
         public List<Note> Possibilities { get; set; }
+
         // Current cantus note in generation
-        public Note CurrentNote { get; set; }
-        // Current position in generation, current count of notes
+        public Note CurrentNote { get; set; } = null;
+
+        // Current note in cantus firmus
         // 0-indexed!
         public int Position { get; set; }
-        // Total expected length of generation
+
+        // Total number of notes in cantus firmus
         // 0-indexed, too!
         public int EndOn { get; set; }
+
         // Previous cantus note
-        public Note PreviousCantus { get; set; }
+        public Note PreviousCantus { get; set; } = null;
+
         //Previous counterpoint note
-        public Note PreviousCounterpoint { get; set; }
+        public Note PreviousCounterpoint { get; set; } = null;
+
 
         public RuleInput()
         {

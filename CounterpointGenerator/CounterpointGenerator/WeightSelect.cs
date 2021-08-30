@@ -88,5 +88,102 @@ namespace CounterpointGenerator
                 list[n] = value;
             }
         }
+
+        // Adjust these to adjust note length weighting
+        public int wholeNoteWeight { get; set; } = 10;
+        public int dottedHalfWeight { get; set; } = 15;
+        public int halfNoteWeight { get; set; } = 30;
+        public int quarterNoteWeight { get; set; } = 20;
+        public int dottedQuarterWeight { get; set; } = 10;
+        public int eighthNoteWeight { get; set; } = 5;
+        public int dottedEighthWeight { get; set; } = 2;
+        public int sixteenthNoteWeight { get; set; } = 2;
+
+        public double GetRandomNoteLength()
+        {
+            List<WeightedItem> lengths = new List<WeightedItem>()
+            {
+                new WeightedItem(Constants.WHOLE_NOTE_LENGTH, wholeNoteWeight),
+                new WeightedItem(Constants.HALF_NOTE_LENGTH + Constants.QUARTER_NOTE_LENGTH, dottedHalfWeight),
+                new WeightedItem(Constants.HALF_NOTE_LENGTH, halfNoteWeight),
+                new WeightedItem(Constants.QUARTER_NOTE_LENGTH + Constants.EIGHTH_NOTE_LENGTH, dottedQuarterWeight),
+                new WeightedItem(Constants.QUARTER_NOTE_LENGTH, quarterNoteWeight),
+                new WeightedItem(Constants.EIGHTH_NOTE_LENGTH + Constants.SIXTEENTH_NOTE_LENGTH, dottedEighthWeight),
+                new WeightedItem(Constants.EIGHTH_NOTE_LENGTH, eighthNoteWeight),
+                new WeightedItem(Constants.SIXTEENTH_NOTE_LENGTH, sixteenthNoteWeight)
+            };
+
+            int totalWeight = 0;
+            foreach(WeightedItem i in lengths)
+            {
+                totalWeight += i.Weight;
+            }
+
+            int rnd = _rnd.Next(0, totalWeight);
+            double output = 0;
+
+            foreach(WeightedItem i in lengths)
+            {
+                if(rnd < i.Weight)
+                {
+                    output = i.Value;
+                    break;
+                }
+                rnd -= i.Weight;
+            }
+
+            return output;
+        }
+
+        // Do not set below 12!
+        public int weightModifier { get; set; } = 17;
+
+        public int GetRandomIntervalFrom(Note n)
+        {
+            if(weightModifier < 12)
+            {
+                throw new Exception("Setting weight modifier below 12 will break things");
+            }
+
+            List<WeightedItem> weightedIntervals = new List<WeightedItem>();
+            // Build a weighted list of intervals where the larger the interval the smaller the weight
+            foreach(int interval in Constants.PERFECT_INTERVALS.Concat(Constants.IMPERFECT_INTERVALS))
+            {
+                weightedIntervals.Add(new WeightedItem(interval + n.Pitch, weightModifier - Math.Abs(interval)));
+            }
+
+            int totalWeight = 0;
+            foreach(WeightedItem wi in weightedIntervals)
+            {
+                totalWeight += wi.Weight;
+            }
+
+            int rnd = _rnd.Next(0, totalWeight);
+            int output = -1000;
+
+            foreach(WeightedItem wi in weightedIntervals)
+            {
+                if(rnd < wi.Weight)
+                {
+                    output = (int) wi.Value;
+                    break;
+                }
+                rnd -= wi.Weight;
+            }
+
+            return output;
+        }
+
+        private struct WeightedItem
+        {
+            public double Value { get; }
+            public int Weight { get; }
+
+            public WeightedItem(double value, int weight)
+            {
+                this.Value = value;
+                this.Weight = weight;
+            }
+        }
     }
 }

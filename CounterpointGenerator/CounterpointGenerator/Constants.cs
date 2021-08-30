@@ -9,6 +9,18 @@ namespace CounterpointGenerator
         // REFERENCE NOTE
         public static int C5 = 0;
 
+        // NOTE LENGTHS
+        /*
+         * Sixteenth notes are a good reasonable "smallest unit"
+         * with lower double values available for even smaller if needed
+         * Adjust WHOLE_NOTE_LENGTH to change math for all lengths
+         */
+        public static double WHOLE_NOTE_LENGTH = 16.0;
+        public static double HALF_NOTE_LENGTH = WHOLE_NOTE_LENGTH / 2;
+        public static double QUARTER_NOTE_LENGTH = HALF_NOTE_LENGTH / 2;
+        public static double EIGHTH_NOTE_LENGTH = QUARTER_NOTE_LENGTH / 2;
+        public static double SIXTEENTH_NOTE_LENGTH = EIGHTH_NOTE_LENGTH / 2;
+
         // INTERVALS
         /*
          * Counted around the idea that C5 = 0
@@ -61,5 +73,12 @@ namespace CounterpointGenerator
             UPPER_MINOR_SIXTH,
             UPPER_MAJOR_SIXTH
         };
+
+        // Default max time to generate
+        // Moved from Input.cs
+        public static double DEFAULT_TIME_LIMIT = 10.0;
+
+        // Number of initial random notes to generate before rules
+        public static int GIVE_ME_LOTS_OF_NOTES = 300;
     }
 }

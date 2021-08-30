@@ -26,7 +26,6 @@ namespace CounterpointGenerator
 
         public void Applicator (RuleInput ruleInput)
         {
-            // Mutate ruleInput.Possibilities, result and logic will need testing
             foreach (IRules r in ruleSet)
             {
                 ruleInput.Possibilities = r.Apply(ruleInput);
