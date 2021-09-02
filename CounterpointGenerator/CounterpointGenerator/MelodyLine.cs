@@ -49,6 +49,27 @@ namespace CounterpointGenerator
             return runningTotal;
         }
 
+        public Note GetNoteAtBeatCount(double beatCount)
+        {
+            if(beatCount > this.BeatCount())
+            {
+                throw new IndexOutOfRangeException($"Beat Count {beatCount} outside max {this.BeatCount()}");
+            }
+
+            double runningCount = 0;
+            foreach(Note n in AMelodyLine)
+            {
+                runningCount += n.Length;
+                if(runningCount >= beatCount)
+                {
+                    return n;
+                }
+            }
+
+            // Shouldn't get here
+            return null;
+        }
+
         public MelodyLine()
         {
             this.AMelodyLine = new List<Note>();
