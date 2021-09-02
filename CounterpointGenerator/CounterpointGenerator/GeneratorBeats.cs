@@ -40,7 +40,7 @@ namespace CounterpointGenerator
 
         private List<MelodyLine> GenerateCounterpointImpl(GenerateCounterpointImplParameters recurPara)
         {
-            Note currentNote = recurPara.CantusFirmus.FirstNote;
+            Note currentNote = recurPara.CantusFirmus.GetNoteAtBeatCount(recurPara.BeatCount);
             List<Note> possibilitiesBeforeRules = GenerateStartingNotes(currentNote);
             List<Note> possibilitiesAfterRules = UseRules(recurPara, possibilitiesBeforeRules, currentNote);
 
@@ -55,8 +55,6 @@ namespace CounterpointGenerator
                     .Select(note => new MelodyLine(new List<Note> { note }))
                     .ToList();
             }
-
-            recurPara.CantusFirmus.RemoveFirstNote();
 
             foreach(Note explore in subListToExplore)
             {
