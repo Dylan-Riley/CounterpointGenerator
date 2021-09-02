@@ -21,6 +21,9 @@ namespace CounterpointGenerator
         public static double EIGHTH_NOTE_LENGTH = QUARTER_NOTE_LENGTH / 2;
         public static double SIXTEENTH_NOTE_LENGTH = EIGHTH_NOTE_LENGTH / 2;
 
+            // Adjust this to change some rule behavior
+        public static double EXPECTED_LONGEST_NOTE = WHOLE_NOTE_LENGTH;
+
         // INTERVALS
         /*
          * Counted around the idea that C5 = 0

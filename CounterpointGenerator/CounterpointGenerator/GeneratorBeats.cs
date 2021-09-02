@@ -43,6 +43,7 @@ namespace CounterpointGenerator
             Note currentNote = recurPara.CantusFirmus.GetNoteAtBeatCount(recurPara.BeatCount);
             List<Note> possibilitiesBeforeRules = GenerateStartingNotes(currentNote);
             List<Note> possibilitiesAfterRules = UseRules(recurPara, possibilitiesBeforeRules, currentNote);
+            // TODO: Rules might need access to solution thus far somehow, outside of just previous ntoe
 
             List<MelodyLine> solutionList = new List<MelodyLine>();
 
@@ -91,7 +92,9 @@ namespace CounterpointGenerator
                 Possibilities = possibleNotes,
                 CurrentNote = currentNote,
                 PreviousCantus = recurPara.PreviousNote,
-                PreviousCounterpoint = recurPara.PreviousCounterpointNote
+                PreviousCounterpoint = recurPara.PreviousCounterpointNote,
+                ExpectedTotalBeatCount = recurPara.TotalBeatCount,
+                CurrentBeatCount = recurPara.BeatCount
             };
 
             ruleApplier = new RuleApplier();

@@ -33,6 +33,9 @@ namespace CounterpointGenerator {
         //Previous counterpoint note
         public Note PreviousCounterpoint { get; set; } = null;
 
+        public double ExpectedTotalBeatCount { get; set; }
+        public double CurrentBeatCount { get; set; }
+
 
         public RuleInput()
         {
