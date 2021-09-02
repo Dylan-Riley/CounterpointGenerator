@@ -39,13 +39,22 @@ namespace CounterpointGenerator.Rules
                 {
                     List<Note> checkNotes = new List<Note>();
                     double addUp = n.Length;
+                    bool firstNote = true;
                     while(addUp > 0)
                     {
                         // Accrue the required next notes
-                        double addNoteCount = currentNoteStart + (n.Length - addUp);
+                        double addNoteCount = ruleInput.CurrentBeatCount + (n.Length - addUp);
                         Note addNote = ruleInput.CantusFirmus.GetNoteAtBeatCount(addNoteCount);
                         checkNotes.Add(addNote);
-                        addUp -= addNote.Length;
+                        if (firstNote)
+                        {
+                            addUp -= untilNextNote;
+                            firstNote = false;
+                        }
+                        else
+                        {
+                            addUp -= addNote.Length;
+                        }
                     }
 
                     bool possibleNote = true;
