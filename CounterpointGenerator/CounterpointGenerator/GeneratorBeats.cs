@@ -94,7 +94,8 @@ namespace CounterpointGenerator
                 PreviousCantus = recurPara.PreviousNote,
                 PreviousCounterpoint = recurPara.PreviousCounterpointNote,
                 ExpectedTotalBeatCount = recurPara.TotalBeatCount,
-                CurrentBeatCount = recurPara.BeatCount
+                CurrentBeatCount = recurPara.BeatCount,
+                CantusFirmus = recurPara.CantusFirmus
             };
 
             ruleApplier = new RuleApplier();
