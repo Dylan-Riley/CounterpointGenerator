@@ -81,10 +81,10 @@ namespace CounterpointGenerator
         private List<Note> UseRules(GenerateCounterpointImplParameters recurPara, List<Note> possibleNotes, Note currentNote)
         {
             // Add more RuleInput below as needed
-            // Will likely need fields for current beat count and total beat count
             RuleInput ri = new RuleInput()
             {
                 // TODO: RuleInput and rules need adjusting to work on beat count
+                // TODO: Old rules what use previous note *need* fixing!
                 Possibilities = possibleNotes,
                 CurrentNote = currentNote,
                 ExpectedTotalBeatCount = recurPara.TotalBeatCount,
