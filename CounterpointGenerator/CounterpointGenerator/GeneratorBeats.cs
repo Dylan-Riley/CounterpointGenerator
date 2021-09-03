@@ -20,8 +20,6 @@ namespace CounterpointGenerator
         private class GenerateCounterpointImplParameters
         {
             internal MelodyLine CantusFirmus { get; set; }
-            internal Note PreviousNote { get; set; } = null;
-            internal Note PreviousCounterpointNote { get; set; } = null;
             internal double BeatCount { get; set; } = 0;
             internal double TotalBeatCount { get; set; }
             internal double Duration { get; set; }
@@ -62,8 +60,6 @@ namespace CounterpointGenerator
                 List<MelodyLine> melodyList = GenerateCounterpointImpl(new GenerateCounterpointImplParameters()
                 {
                     CantusFirmus = recurPara.CantusFirmus,
-                    PreviousNote = currentNote,
-                    PreviousCounterpointNote = explore,
                     BeatCount = recurPara.BeatCount + explore.Length,
                     TotalBeatCount = recurPara.TotalBeatCount,
                     Duration = recurPara.Duration
@@ -91,8 +87,6 @@ namespace CounterpointGenerator
                 // TODO: RuleInput and rules need adjusting to work on beat count
                 Possibilities = possibleNotes,
                 CurrentNote = currentNote,
-                PreviousCantus = recurPara.PreviousNote,
-                PreviousCounterpoint = recurPara.PreviousCounterpointNote,
                 ExpectedTotalBeatCount = recurPara.TotalBeatCount,
                 CurrentBeatCount = recurPara.BeatCount,
                 CantusFirmus = recurPara.CantusFirmus
