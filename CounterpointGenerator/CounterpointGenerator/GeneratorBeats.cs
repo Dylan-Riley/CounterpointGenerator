@@ -8,7 +8,7 @@ namespace CounterpointGenerator
 {
     class GeneratorBeats: IGenerator
     {
-        private RuleApplier ruleApplier;
+        private RuleApplierBeats ruleApplier;
         private IWeightSelect _weightSelector;
         private double startTime;
 
@@ -38,6 +38,10 @@ namespace CounterpointGenerator
 
         private List<MelodyLine> GenerateCounterpointImpl(GenerateCounterpointImplParameters recurPara)
         {
+            if(recurPara.BeatCount == recurPara.TotalBeatCount)
+            {
+                return null;
+            }
             Note currentNote = recurPara.CantusFirmus.GetNoteAtBeatCount(recurPara.BeatCount);
             List<Note> possibilitiesBeforeRules = GenerateStartingNotes(currentNote);
             List<Note> possibilitiesAfterRules = UseRules(recurPara, possibilitiesBeforeRules, currentNote);
@@ -47,8 +51,7 @@ namespace CounterpointGenerator
 
             List<Note> subListToExplore = _weightSelector.SelectPossibilities(possibilitiesAfterRules, currentNote);
 
-            if(recurPara.BeatCount == recurPara.TotalBeatCount ||
-                new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() - startTime >= recurPara.Duration * 1000)
+            if(new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() - startTime >= recurPara.Duration * 1000)
             {
                 return subListToExplore
                     .Select(note => new MelodyLine(new List<Note> { note }))
@@ -64,6 +67,11 @@ namespace CounterpointGenerator
                     TotalBeatCount = recurPara.TotalBeatCount,
                     Duration = recurPara.Duration
                 });
+
+                if(melodyList == null)
+                {
+                    break;
+                }
 
                 List<MelodyLine> solution = new List<MelodyLine>();
                 foreach (MelodyLine line in melodyList)
@@ -92,7 +100,7 @@ namespace CounterpointGenerator
                 CantusFirmus = recurPara.CantusFirmus
             };
 
-            ruleApplier = new RuleApplier();
+            ruleApplier = new RuleApplierBeats();
             if (ruleApplier.GenerateSet())
             {
                 ruleApplier.Applicator(ri);

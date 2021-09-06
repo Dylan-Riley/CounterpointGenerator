@@ -107,7 +107,7 @@ namespace CounterpointGenerator
 
         public override string ToString()
         {
-            return string.Join(", ", AMelodyLine);
+            return string.Join(", ", AMelodyLine) + $" Beat count:{this.BeatCount()}";
         }
 
     }

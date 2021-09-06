@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CounterpointGenerator.Rules
+namespace CounterpointGenerator
 {
     class HeldNoteIntervalsRule: IRules
     {

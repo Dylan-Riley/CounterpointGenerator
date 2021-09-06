@@ -23,7 +23,7 @@ namespace CounterpointGenerator
                     services.AddHostedService<GeneratorHost>()
                             // For now, registering mocks.
                             .AddSingleton<IInputTranslator, InputTranslator>()
-                            .AddSingleton<IGenerator, Generator>()
+                            .AddSingleton<IGenerator, GeneratorBeats>()
                             .AddSingleton<IOutputTranslator, OutputTranslator>()
                             .AddSingleton<IWeightSelect, WeightSelect>());
         // Let's make everything a singleton for now.
