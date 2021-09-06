@@ -39,6 +39,11 @@ namespace CounterpointGenerator
                     throw new TaskCanceledException();
                 }
 
+                if(melodyInput == "test_input")
+                {
+                    melodyInput = Constants.TEST_INPUT;
+                }
+
                 string[] outerSplit = melodyInput.Split(", ");
 
                 if (outerSplit.Length == 1)

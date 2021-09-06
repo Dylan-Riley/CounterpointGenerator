@@ -8,7 +8,7 @@ namespace CounterpointGenerator
 {
     class GeneratorBeats: IGenerator
     {
-        private RuleApplier ruleApplier;
+        private RuleApplierBeats ruleApplier;
         private IWeightSelect _weightSelector;
         private double startTime;
 
@@ -20,8 +20,6 @@ namespace CounterpointGenerator
         private class GenerateCounterpointImplParameters
         {
             internal MelodyLine CantusFirmus { get; set; }
-            internal Note PreviousNote { get; set; } = null;
-            internal Note PreviousCounterpointNote { get; set; } = null;
             internal double BeatCount { get; set; } = 0;
             internal double TotalBeatCount { get; set; }
             internal double Duration { get; set; }
@@ -40,43 +38,50 @@ namespace CounterpointGenerator
 
         private List<MelodyLine> GenerateCounterpointImpl(GenerateCounterpointImplParameters recurPara)
         {
-            Note currentNote = recurPara.CantusFirmus.FirstNote;
+            if(recurPara.BeatCount == recurPara.TotalBeatCount)
+            {
+                return null;
+            }
+            Note currentNote = recurPara.CantusFirmus.GetNoteAtBeatCount(recurPara.BeatCount);
             List<Note> possibilitiesBeforeRules = GenerateStartingNotes(currentNote);
             List<Note> possibilitiesAfterRules = UseRules(recurPara, possibilitiesBeforeRules, currentNote);
+            // TODO: Rules might need access to solution thus far somehow, outside of just previous ntoe
 
             List<MelodyLine> solutionList = new List<MelodyLine>();
 
             List<Note> subListToExplore = _weightSelector.SelectPossibilities(possibilitiesAfterRules, currentNote);
 
-            if(recurPara.BeatCount == recurPara.TotalBeatCount ||
-                new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() - startTime >= recurPara.Duration * 1000)
+            if(new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() - startTime >= recurPara.Duration * 1000)
             {
                 return subListToExplore
                     .Select(note => new MelodyLine(new List<Note> { note }))
                     .ToList();
             }
 
-            recurPara.CantusFirmus.RemoveFirstNote();
-
             foreach(Note explore in subListToExplore)
             {
                 List<MelodyLine> melodyList = GenerateCounterpointImpl(new GenerateCounterpointImplParameters()
                 {
                     CantusFirmus = recurPara.CantusFirmus,
-                    PreviousNote = currentNote,
-                    PreviousCounterpointNote = explore,
                     BeatCount = recurPara.BeatCount + explore.Length,
                     TotalBeatCount = recurPara.TotalBeatCount,
                     Duration = recurPara.Duration
                 });
 
-                List<MelodyLine> solution = new List<MelodyLine>();
-                foreach (MelodyLine line in melodyList)
+                if (melodyList == null)
                 {
-                    line.Prepend(explore);
-                    solution.Add(line);
+                    // Do nothing
                 }
-                solutionList.AddRange(solution);
+                else
+                {
+                    List<MelodyLine> solution = new List<MelodyLine>();
+                    foreach (MelodyLine line in melodyList)
+                    {
+                        line.Prepend(explore);
+                        solution.Add(line);
+                    }
+                    solutionList.AddRange(solution);
+                }
             }
 
             return solutionList;
@@ -86,17 +91,17 @@ namespace CounterpointGenerator
         private List<Note> UseRules(GenerateCounterpointImplParameters recurPara, List<Note> possibleNotes, Note currentNote)
         {
             // Add more RuleInput below as needed
-            // Will likely need fields for current beat count and total beat count
             RuleInput ri = new RuleInput()
             {
-                // TODO: RuleInput and rules need adjusting to work on beat count
+                // TODO: Old rules what use previous note *need* fixing!
                 Possibilities = possibleNotes,
                 CurrentNote = currentNote,
-                PreviousCantus = recurPara.PreviousNote,
-                PreviousCounterpoint = recurPara.PreviousCounterpointNote
+                ExpectedTotalBeatCount = recurPara.TotalBeatCount,
+                CurrentBeatCount = recurPara.BeatCount,
+                CantusFirmus = recurPara.CantusFirmus
             };
 
-            ruleApplier = new RuleApplier();
+            ruleApplier = new RuleApplierBeats();
             if (ruleApplier.GenerateSet())
             {
                 ruleApplier.Applicator(ri);

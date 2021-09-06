@@ -9,6 +9,12 @@ namespace CounterpointGenerator
         // REFERENCE NOTE
         public static int C5 = 0;
 
+        // TEST INPUT
+        /*
+         * |0000|0000|0000|0000||1111|2222|3333|3333||4466|0000|0000|2222||
+         */
+        public static string TEST_INPUT = "0 16, 1 4, 2 4, 3 8, 4 2, 6 2, 0 8, 2 4";
+
         // NOTE LENGTHS
         /*
          * Sixteenth notes are a good reasonable "smallest unit"
@@ -20,6 +26,9 @@ namespace CounterpointGenerator
         public static double QUARTER_NOTE_LENGTH = HALF_NOTE_LENGTH / 2;
         public static double EIGHTH_NOTE_LENGTH = QUARTER_NOTE_LENGTH / 2;
         public static double SIXTEENTH_NOTE_LENGTH = EIGHTH_NOTE_LENGTH / 2;
+
+            // Adjust this to change some rule behavior
+        public static double EXPECTED_LONGEST_NOTE = WHOLE_NOTE_LENGTH;
 
         // INTERVALS
         /*
@@ -80,5 +89,7 @@ namespace CounterpointGenerator
 
         // Number of initial random notes to generate before rules
         public static int GIVE_ME_LOTS_OF_NOTES = 300;
+
+
     }
 }
