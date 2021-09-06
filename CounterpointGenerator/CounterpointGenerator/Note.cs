@@ -25,7 +25,7 @@ namespace CounterpointGenerator
 
         public override string ToString()
         {
-            return $"(pitch: {Pitch}, length: {Length})";
+            return $"(p: {Pitch}, l: {Length})";
         }
     }
 }

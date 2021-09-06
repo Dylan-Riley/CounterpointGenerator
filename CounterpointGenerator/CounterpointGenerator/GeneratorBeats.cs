@@ -68,18 +68,20 @@ namespace CounterpointGenerator
                     Duration = recurPara.Duration
                 });
 
-                if(melodyList == null)
+                if (melodyList == null)
                 {
-                    break;
+                    // Do nothing
                 }
-
-                List<MelodyLine> solution = new List<MelodyLine>();
-                foreach (MelodyLine line in melodyList)
+                else
                 {
-                    line.Prepend(explore);
-                    solution.Add(line);
+                    List<MelodyLine> solution = new List<MelodyLine>();
+                    foreach (MelodyLine line in melodyList)
+                    {
+                        line.Prepend(explore);
+                        solution.Add(line);
+                    }
+                    solutionList.AddRange(solution);
                 }
-                solutionList.AddRange(solution);
             }
 
             return solutionList;
