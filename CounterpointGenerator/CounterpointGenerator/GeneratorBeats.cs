@@ -91,7 +91,6 @@ namespace CounterpointGenerator
             // Add more RuleInput below as needed
             RuleInput ri = new RuleInput()
             {
-                // TODO: RuleInput and rules need adjusting to work on beat count
                 // TODO: Old rules what use previous note *need* fixing!
                 Possibilities = possibleNotes,
                 CurrentNote = currentNote,
