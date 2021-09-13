@@ -91,6 +91,25 @@ namespace CounterpointGenerator
                 }
             }
 
+            Dictionary<string, int> timeSig = new Dictionary<string, int>();
+            bool checkSig = true;
+            while (checkSig)
+            {
+                Console.WriteLine("Please enter the time signature of your melody line, default 4/4");
+                Console.WriteLine("ACTUALLY, unimplemented right now, left for future expansion when time ");
+                string inputSig = Console.ReadLine();
+                if(inputSig == "")
+                {
+                    timeSig.Add(Constants.TIMESIG_BEATS, Constants.DEFAULT_MEASURE_BEATS);
+                    timeSig.Add(Constants.TIMESIG_VALUE, Constants.DEFAULT_BEAT_VALUE);
+                    checkSig = false;
+                }
+                else
+                {
+                    // Add when custom time signature handling is actually managed
+                }
+            }
+
             // Generation time input
             Console.WriteLine("Insert a prefered generating duration(in seconds): ");
             double userPreference = 0;
@@ -117,7 +136,7 @@ namespace CounterpointGenerator
                 }
             }
 
-            var input = new Input(new MelodyLine(inputList), userPreference);
+            var input = new Input(new MelodyLine(inputList, timeSig), userPreference);
             Console.WriteLine(input.ToString());
             return Task.FromResult<IInput>(input);
         }

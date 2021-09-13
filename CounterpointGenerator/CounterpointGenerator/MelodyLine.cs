@@ -7,12 +7,22 @@ namespace CounterpointGenerator
     public class MelodyLine
     {
         public List<Note> AMelodyLine { get; set; }
+        public Dictionary<string, int> TimeSignature { get; }
 
 
         public Note FirstNote {
             get
             {
                 return this.AMelodyLine[0];
+            }
+        }
+
+        public Note LastNote
+        {
+            get
+            {
+                // This is an "index operator" used to count from the end
+                return this.AMelodyLine[^1];
             }
         }
 
@@ -98,11 +108,21 @@ namespace CounterpointGenerator
         public MelodyLine()
         {
             this.AMelodyLine = new List<Note>();
+            TimeSignature.Add(Constants.TIMESIG_BEATS, Constants.DEFAULT_MEASURE_BEATS);
+            TimeSignature.Add(Constants.TIMESIG_VALUE, Constants.DEFAULT_BEAT_VALUE);
         }
 
         public MelodyLine(List<Note> listOfNotes)
         {
             this.AMelodyLine = new List<Note>(listOfNotes);
+            TimeSignature.Add(Constants.TIMESIG_BEATS, Constants.DEFAULT_MEASURE_BEATS);
+            TimeSignature.Add(Constants.TIMESIG_VALUE, Constants.DEFAULT_BEAT_VALUE);
+        }
+
+        public MelodyLine(List<Note> listOfNotes, Dictionary<string, int> timeSig)
+        {
+            this.AMelodyLine = new List<Note>(listOfNotes);
+            TimeSignature = timeSig;
         }
 
         public override string ToString()
