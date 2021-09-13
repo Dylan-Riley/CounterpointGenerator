@@ -113,6 +113,7 @@ namespace CounterpointGenerator
         public MelodyLine()
         {
             this.AMelodyLine = new List<Note>();
+            TimeSignature = new Dictionary<string, int>();
             TimeSignature.Add(Constants.TIMESIG_BEATS, Constants.DEFAULT_MEASURE_BEATS);
             TimeSignature.Add(Constants.TIMESIG_VALUE, Constants.DEFAULT_BEAT_VALUE);
         }
@@ -120,6 +121,7 @@ namespace CounterpointGenerator
         public MelodyLine(List<Note> listOfNotes)
         {
             this.AMelodyLine = new List<Note>(listOfNotes);
+            TimeSignature = new Dictionary<string, int>();
             TimeSignature.Add(Constants.TIMESIG_BEATS, Constants.DEFAULT_MEASURE_BEATS);
             TimeSignature.Add(Constants.TIMESIG_VALUE, Constants.DEFAULT_BEAT_VALUE);
         }

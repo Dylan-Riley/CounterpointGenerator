@@ -11,7 +11,7 @@ namespace CounterpointGenerator
         // Maximum number of notes to select into
         public int maximumCount { get; set; } = 5;
         // Maximum number of times the select if statements can fail to find anything before hard picking something
-        public int maximumFail { get; set; } = 5;
+        public int maximumFail { get; set; } = 10;
         // Chance that Imperfect Consonance is selected
         public int imperfectChance { get; set; } = 75;
 
@@ -19,7 +19,7 @@ namespace CounterpointGenerator
         {
             if (selectFrom.Count <= maximumCount)
             {
-                // Don't bother with weight selecting if there's already less than five notes to pick from
+                // Don't bother with weight selecting if there's already less than count notes to pick from
                 return selectFrom;
             }
 

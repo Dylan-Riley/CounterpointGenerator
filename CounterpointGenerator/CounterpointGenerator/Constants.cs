@@ -96,7 +96,7 @@ namespace CounterpointGenerator
         public static int DEFAULT_BEAT_VALUE = 4;
 
         // Number of initial random notes to generate before rules
-        public static int GIVE_ME_LOTS_OF_NOTES = 300;
+        public static int GIVE_ME_LOTS_OF_NOTES = 200;
 
 
     }

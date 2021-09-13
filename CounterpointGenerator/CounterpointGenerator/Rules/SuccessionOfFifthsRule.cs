@@ -19,8 +19,8 @@ namespace CounterpointGenerator
             foreach(Note n in ruleInput.Possibilities)
             {
                 int currentInterval = n.Pitch - ruleInput.CurrentNote.Pitch;
-                if (currentInterval == Constants.UPPER_FIFTH || currentInterval == Constants.LOWER_FIFTH
-                    || !(ruleInput.CurrentBeatCount == 0))
+                if ((currentInterval == Constants.UPPER_FIFTH || currentInterval == Constants.LOWER_FIFTH)
+                    && !(ruleInput.CurrentBeatCount == 0))
                 {
                     // If we want to add a fifth, start checking rule logic
                     Note previousCounterpoint = ruleInput.CounterpointThusFar.LastNote;
