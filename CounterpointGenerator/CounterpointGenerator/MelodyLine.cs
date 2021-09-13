@@ -40,6 +40,11 @@ namespace CounterpointGenerator
             this.AMelodyLine.Insert(0, firstCounterNote);
         }
 
+        public void Add(Note n)
+        {
+            this.AMelodyLine.Add(n);
+        }
+
         public int Length()
         {
             // NOT the length as in beats
@@ -123,6 +128,15 @@ namespace CounterpointGenerator
         {
             this.AMelodyLine = new List<Note>(listOfNotes);
             TimeSignature = timeSig;
+        }
+
+        public MelodyLine(MelodyLine otherLine, Note addNote)
+        {
+            // Helper constructor to avoid mutation in GeneratorBeats
+            this.AMelodyLine = new List<Note>(otherLine.AMelodyLine);
+            this.TimeSignature = otherLine.TimeSignature;
+
+            this.AMelodyLine.Add(addNote);
         }
 
         public override string ToString()
