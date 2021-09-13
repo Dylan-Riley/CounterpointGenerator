@@ -17,8 +17,9 @@ namespace CounterpointGenerator
         {
             ruleSet.Add(new NoteTooLongRule()); // NEEDS TO BE FIRST
             ruleSet.Add(new HeldNoteIntervalsRule());
+            ruleSet.Add(new SuccessionOfFifthsRule());
 
-            return ruleSet.Count == 2;
+            return ruleSet.Count == 3;
         }
 
         public void Applicator (RuleInput ri)
