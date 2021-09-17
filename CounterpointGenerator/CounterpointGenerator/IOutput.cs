@@ -16,5 +16,10 @@ namespace CounterpointGenerator
         // Add something for the generated counterpoint.
 
         string ToString();
+
+        // Gather up entries in Cantus based on like features
+        void Collect();
+        string CompleteToString();
+        string CloseToToString();
     }
 }

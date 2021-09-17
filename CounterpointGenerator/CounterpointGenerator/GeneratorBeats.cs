@@ -131,7 +131,7 @@ namespace CounterpointGenerator
         public Task<IOutput> Generate(IInput input)
         {
             startTime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
-            Output output = new Output();
+            Output output = new Output(input.Cantus.BeatCount());
             output.Cantus = GenerateCounterpoint(input.Cantus, input.userPreference);
             return Task.FromResult<IOutput>(output);
         }

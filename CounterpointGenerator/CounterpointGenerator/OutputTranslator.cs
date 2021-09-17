@@ -11,8 +11,12 @@ namespace CounterpointGenerator
 
         public Task TranslateOutput(IOutput output)
         {
+            output.Collect();
+            
             Console.WriteLine("Output from counterpoint generator:");
-            Console.WriteLine(output.ToString());
+            Console.WriteLine(output.CompleteToString() + "\n");
+            Console.WriteLine(output.CloseToToString());
+            
             return Task.CompletedTask;
         }
 

@@ -98,6 +98,10 @@ namespace CounterpointGenerator
         // Number of initial random notes to generate before rules
         public static int GIVE_ME_LOTS_OF_NOTES = 200;
 
-
+        // % error allowed in output collecting
+        // for considered "close to" completed
+        public static double OUTPUT_ERROR_MARGIN = 10.0;
+        // DEFAULT "10.0" means if a melody line is 90% of the way
+        // to complete it is "close to"
     }
 }
