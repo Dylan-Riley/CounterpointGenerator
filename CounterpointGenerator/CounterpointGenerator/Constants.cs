@@ -87,8 +87,16 @@ namespace CounterpointGenerator
         // Moved from Input.cs
         public static double DEFAULT_TIME_LIMIT = 10.0;
 
+        // TIME SIGNATURE KEYS
+        public static string TIMESIG_BEATS = "beats";
+        public static string TIMESIG_VALUE = "value";
+
+        // Default Time Signature numbers
+        public static int DEFAULT_MEASURE_BEATS = 4;
+        public static int DEFAULT_BEAT_VALUE = 4;
+
         // Number of initial random notes to generate before rules
-        public static int GIVE_ME_LOTS_OF_NOTES = 300;
+        public static int GIVE_ME_LOTS_OF_NOTES = 200;
 
 
     }

@@ -20,6 +20,7 @@ namespace CounterpointGenerator
         private class GenerateCounterpointImplParameters
         {
             internal MelodyLine CantusFirmus { get; set; }
+            internal MelodyLine WorkingCounterpoint { get; set; }
             internal double BeatCount { get; set; } = 0;
             internal double TotalBeatCount { get; set; }
             internal double Duration { get; set; }
@@ -30,6 +31,7 @@ namespace CounterpointGenerator
             GenerateCounterpointImplParameters para = new GenerateCounterpointImplParameters
             {
                 CantusFirmus = inputCantusFirmus,
+                WorkingCounterpoint = new MelodyLine(),
                 TotalBeatCount = inputCantusFirmus.BeatCount(),
                 Duration = duration
             };
@@ -45,7 +47,6 @@ namespace CounterpointGenerator
             Note currentNote = recurPara.CantusFirmus.GetNoteAtBeatCount(recurPara.BeatCount);
             List<Note> possibilitiesBeforeRules = GenerateStartingNotes(currentNote);
             List<Note> possibilitiesAfterRules = UseRules(recurPara, possibilitiesBeforeRules, currentNote);
-            // TODO: Rules might need access to solution thus far somehow, outside of just previous ntoe
 
             List<MelodyLine> solutionList = new List<MelodyLine>();
 
@@ -63,6 +64,7 @@ namespace CounterpointGenerator
                 List<MelodyLine> melodyList = GenerateCounterpointImpl(new GenerateCounterpointImplParameters()
                 {
                     CantusFirmus = recurPara.CantusFirmus,
+                    WorkingCounterpoint = new MelodyLine(recurPara.WorkingCounterpoint, explore),
                     BeatCount = recurPara.BeatCount + explore.Length,
                     TotalBeatCount = recurPara.TotalBeatCount,
                     Duration = recurPara.Duration
@@ -98,7 +100,8 @@ namespace CounterpointGenerator
                 CurrentNote = currentNote,
                 ExpectedTotalBeatCount = recurPara.TotalBeatCount,
                 CurrentBeatCount = recurPara.BeatCount,
-                CantusFirmus = recurPara.CantusFirmus
+                CantusFirmus = recurPara.CantusFirmus,
+                CounterpointThusFar = recurPara.WorkingCounterpoint
             };
 
             ruleApplier = new RuleApplierBeats();

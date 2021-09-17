@@ -37,7 +37,7 @@ namespace CounterpointGenerator {
         public double CurrentBeatCount { get; set; }
 
         public MelodyLine CantusFirmus { get; set; }
-
+        public MelodyLine CounterpointThusFar { get; set; }
 
         public RuleInput()
         {

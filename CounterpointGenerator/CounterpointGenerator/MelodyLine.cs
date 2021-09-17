@@ -7,12 +7,22 @@ namespace CounterpointGenerator
     public class MelodyLine
     {
         public List<Note> AMelodyLine { get; set; }
+        public Dictionary<string, int> TimeSignature { get; }
 
 
         public Note FirstNote {
             get
             {
                 return this.AMelodyLine[0];
+            }
+        }
+
+        public Note LastNote
+        {
+            get
+            {
+                // This is an "index operator" used to count from the end
+                return this.AMelodyLine[^1];
             }
         }
 
@@ -28,6 +38,11 @@ namespace CounterpointGenerator
         public void Prepend(Note firstCounterNote)
         {
             this.AMelodyLine.Insert(0, firstCounterNote);
+        }
+
+        public void Add(Note n)
+        {
+            this.AMelodyLine.Add(n);
         }
 
         public int Length()
@@ -98,11 +113,32 @@ namespace CounterpointGenerator
         public MelodyLine()
         {
             this.AMelodyLine = new List<Note>();
+            TimeSignature = new Dictionary<string, int>();
+            TimeSignature.Add(Constants.TIMESIG_BEATS, Constants.DEFAULT_MEASURE_BEATS);
+            TimeSignature.Add(Constants.TIMESIG_VALUE, Constants.DEFAULT_BEAT_VALUE);
         }
 
         public MelodyLine(List<Note> listOfNotes)
         {
             this.AMelodyLine = new List<Note>(listOfNotes);
+            TimeSignature = new Dictionary<string, int>();
+            TimeSignature.Add(Constants.TIMESIG_BEATS, Constants.DEFAULT_MEASURE_BEATS);
+            TimeSignature.Add(Constants.TIMESIG_VALUE, Constants.DEFAULT_BEAT_VALUE);
+        }
+
+        public MelodyLine(List<Note> listOfNotes, Dictionary<string, int> timeSig)
+        {
+            this.AMelodyLine = new List<Note>(listOfNotes);
+            TimeSignature = timeSig;
+        }
+
+        public MelodyLine(MelodyLine otherLine, Note addNote)
+        {
+            // Helper constructor to avoid mutation in GeneratorBeats
+            this.AMelodyLine = new List<Note>(otherLine.AMelodyLine);
+            this.TimeSignature = otherLine.TimeSignature;
+
+            this.AMelodyLine.Add(addNote);
         }
 
         public override string ToString()
